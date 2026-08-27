@@ -8,11 +8,12 @@ and then these become real answers rather than a script.
 
 ## The one-line version
 
-"It tracks 24 assets daily and flags moves that are statistically unusual for that
-particular asset — a 2% move in gas isn't news, a 2% move in Treasuries is."
+"It's a daily read on equities, sectors, commodities and currencies — and it flags
+moves that are unusual for that particular asset, so a 2% day in gas isn't news but
+a 2% day in Treasuries is."
 
-That sentence does the work. It shows you understand that volatility is
-asset-specific, which is the actual insight.
+That sentence does the work. It says what the thing is, then lands the actual
+insight: volatility is asset-specific, so "big move" means nothing on its own.
 
 ---
 

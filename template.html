@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market Anomaly Dashboard</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --panel:#ffffff; --border:#e3e6ec; --ink:#12161f;
+    --muted:#67708a; --faint:#9aa2b8;
+    --up:#0a7d5a; --down:#c0392f; --flat:#67708a;
+    --accent:#2f5fd0; --warn:#b5761b;
+    --up-bg:#e6f4ef; --down-bg:#fdeceb; --warn-bg:#fdf3e3;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0d1017; --panel:#151a24; --border:#252c3a; --ink:#e8ecf4;
+      --muted:#98a2b8; --faint:#6b7488;
+      --up:#3ddc9a; --down:#ff6b5e; --flat:#98a2b8;
+      --accent:#7aa2f7; --warn:#e0a458;
+      --up-bg:#123027; --down-bg:#331d1c; --warn-bg:#2e2415;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:40px 24px 72px}
+
+  header{margin-bottom:32px}
+  h1{font-size:26px; margin:0 0 6px; letter-spacing:-.02em; font-weight:650}
+  .sub{color:var(--muted); font-size:14px; margin:0}
+  .stamp{color:var(--faint); font-size:12.5px; margin-top:10px; font-family:var(--mono)}
+
+  .banner{
+    background:var(--warn-bg); border:1px solid var(--border);
+    border-left:3px solid var(--warn);
+    border-radius:8px; padding:14px 16px; margin:24px 0 32px;
+    font-size:13.5px; color:var(--ink);
+  }
+  .banner b{font-weight:640}
+  .banner .prog{
+    font-family:var(--mono); font-size:12px; color:var(--muted);
+    margin-top:8px; display:block;
+  }
+  .bar{
+    height:4px; background:var(--border); border-radius:2px;
+    margin-top:6px; overflow:hidden; max-width:280px;
+  }
+  .bar i{display:block; height:100%; background:var(--warn); border-radius:2px}
+
+  section{margin-bottom:40px}
+  h2{
+    font-size:12px; text-transform:uppercase; letter-spacing:.09em;
+    color:var(--muted); font-weight:650; margin:0 0 4px;
+  }
+  .note{color:var(--faint); font-size:13px; margin:0 0 14px}
+
+  .grid{display:grid; gap:14px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+
+  .card{
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:10px; padding:16px 18px;
+  }
+  .card .label{font-size:12.5px; color:var(--muted); margin-bottom:2px}
+  .card .name{font-size:14px; font-weight:600; margin-bottom:8px}
+  .card .val{font-size:24px; font-weight:650; letter-spacing:-.02em; font-family:var(--mono)}
+  .card .chg{font-size:13.5px; font-weight:600; margin-top:2px; font-family:var(--mono)}
+  .tick{font-family:var(--mono); font-size:11.5px; color:var(--faint)}
+
+  .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+
+  table{width:100%; border-collapse:collapse; font-size:14px}
+  .scroll{overflow-x:auto; border:1px solid var(--border); border-radius:10px; background:var(--panel)}
+  th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.07em;
+    color:var(--muted); font-weight:640; padding:11px 14px;
+    border-bottom:1px solid var(--border); white-space:nowrap;
+  }
+  td{padding:11px 14px; border-bottom:1px solid var(--border); white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-family:var(--mono); font-size:13px}
+  .sym{font-family:var(--mono); font-weight:640; font-size:13px}
+  .desc{color:var(--muted); font-size:13px}
+
+  .pill{
+    display:inline-block; padding:2px 8px; border-radius:20px;
+    font-size:11px; font-weight:640; letter-spacing:.02em;
+  }
+  .pill.o{background:var(--up-bg); color:var(--up)}
+  .pill.u{background:var(--down-bg); color:var(--down)}
+  .pill.n{background:var(--bg); color:var(--muted); border:1px solid var(--border)}
+
+  .news li{
+    list-style:none; padding:13px 0; border-bottom:1px solid var(--border);
+  }
+  .news{margin:0; padding:0}
+  .news li:last-child{border-bottom:none}
+  .news a{color:var(--ink); text-decoration:none; font-weight:560; font-size:14px}
+  .news a:hover{color:var(--accent); text-decoration:underline}
+  .news .meta{font-size:12px; color:var(--faint); margin-top:3px; font-family:var(--mono)}
+
+  .method{
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:10px; padding:20px 22px; font-size:13.5px; color:var(--muted);
+  }
+  .method h3{font-size:13px; color:var(--ink); margin:0 0 8px; font-weight:640}
+  .method p{margin:0 0 12px}
+  .method p:last-child{margin-bottom:0}
+  .method code{
+    font-family:var(--mono); font-size:12.5px; background:var(--bg);
+    padding:1px 5px; border-radius:4px; border:1px solid var(--border);
+  }
+  footer{
+    margin-top:48px; padding-top:20px; border-top:1px solid var(--border);
+    color:var(--faint); font-size:12.5px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Market Anomaly Dashboard</h1>
+  <p class="sub">Tracks cross-asset moves and flags statistically unusual ones against a rolling baseline.</p>
+  <p class="stamp" id="stamp">loading…</p>
+</header>
+
+<div id="banner"></div>
+
+<section>
+  <h2>Benchmarks</h2>
+  <p class="note">Today's close vs. previous close.</p>
+  <div class="grid g3" id="bench"></div>
+</section>
+
+<section>
+  <h2>Anomaly Screen</h2>
+  <p class="note" id="anomNote"></p>
+  <div class="scroll"><table id="anomTable"></table></div>
+</section>
+
+<section>
+  <h2>Sector Rotation</h2>
+  <p class="note">Each sector's move relative to the S&amp;P 500 today. Positive means it outperformed the index.</p>
+  <div class="scroll"><table id="rotTable"></table></div>
+</section>
+
+<section>
+  <h2>Commodities &amp; Currencies</h2>
+  <p class="note">Tracked via liquid ETF proxies — see methodology.</p>
+  <div class="scroll"><table id="macroTable"></table></div>
+</section>
+
+<section>
+  <h2>Market Headlines</h2>
+  <p class="note">General market news at time of collection, for cross-referencing against flagged moves.</p>
+  <ul class="news" id="news"></ul>
+</section>
+
+<section>
+  <h2>Methodology</h2>
+  <div class="method">
+    <h3>How a move gets flagged</h3>
+    <p>
+      Each trading day a collector records the closing quote for every symbol on the
+      watchlist. A symbol's daily percentage change is scored against the mean and
+      standard deviation of its own prior daily changes:
+      <code>z = (today − mean) / stdev</code>. A reading of <code>|z| ≥ 2</code> is
+      flagged — the move is roughly two standard deviations from how that asset
+      normally behaves, which is the definition of "anomalous" used here. Scoring
+      requires at least <code>10</code> prior observations; below that the screen
+      reports insufficient data rather than a number.
+    </p>
+    <h3>Why ETF proxies</h3>
+    <p>
+      Finnhub's free tier covers equities but not futures or FX, so commodities and
+      foreign indices are tracked through liquid ETFs that hold or track them —
+      <code>USO</code> for WTI crude, <code>GLD</code> for gold, <code>EWU</code> for
+      UK equities, <code>FXB</code> for sterling. These carry tracking error and, for
+      the commodity funds, roll cost, so they are directional indicators rather than
+      spot prices.
+    </p>
+    <h3>Known limits</h3>
+    <p>
+      The baseline is built from daily closes only, so intraday moves are invisible.
+      A flag is a prompt to investigate, not a signal — an earnings date or an index
+      rebalance produces the same statistical footprint as a genuine dislocation, and
+      separating those requires reading the news, which is why headlines sit alongside
+      the screen.
+    </p>
+  </div>
+</section>
+
+<footer id="foot"></footer>
+
+</div>
+
+<script>
+const INLINE = /*__HISTORY__*/null;
+const MIN_OBS = 10;
+
+const fmt = (n, d = 2) => n.toLocaleString('en-GB', {minimumFractionDigits: d, maximumFractionDigits: d});
+const pct = n => (n >= 0 ? '+' : '') + n.toFixed(2) + '%';
+const cls = n => n > 0.001 ? 'up' : n < -0.001 ? 'down' : 'flat';
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function mean(a){ return a.reduce((x,y)=>x+y,0) / a.length; }
+function stdev(a){
+  if (a.length < 2) return 0;
+  const m = mean(a);
+  return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2, 0) / (a.length - 1));
+}
+
+// Build per-symbol series of daily % changes, oldest first.
+function series(hist){
+  const out = {};
+  for (const snap of hist.snapshots){
+    for (const [sym, q] of Object.entries(snap.quotes)){
+      (out[sym] ||= []).push({date: snap.date, dp: q.dp, c: q.c});
+    }
+  }
+  return out;
+}
+
+function render(hist){
+  const meta = hist.meta || {};
+  const wl = meta.watchlist || {};
+  const snaps = hist.snapshots || [];
+
+  if (!snaps.length){
+    document.getElementById('banner').innerHTML =
+      '<div class="banner"><b>No data collected yet.</b> Run <code>collect.py</code> to record the first snapshot.</div>';
+    document.getElementById('stamp').textContent = '';
+    return;
+  }
+
+  const latest = snaps[snaps.length - 1];
+  const ser = series(hist);
+  const n = snaps.length;
+
+  // ---- stamp ----
+  const when = new Date(latest.collected_at);
+  document.getElementById('stamp').textContent =
+    `Latest snapshot ${latest.date} · collected ${when.toISOString().slice(11,16)} UTC · ${n} day${n===1?'':'s'} on file`;
+
+  // ---- baseline banner ----
+  const ready = n > MIN_OBS;
+  const bn = document.getElementById('banner');
+  if (!ready){
+    const need = MIN_OBS + 1 - n;
+    bn.innerHTML = `<div class="banner">
+      <b>Baseline still building.</b> Anomaly scoring needs ${MIN_OBS} prior daily
+      observations per symbol before a z-score means anything. The collector has
+      recorded ${n}. Roughly ${need} more trading day${need===1?'':'s'} of collection
+      to go — until then the screen below reports raw moves without flags.
+      <span class="prog">${n} / ${MIN_OBS + 1} sessions</span>
+      <span class="bar"><i style="width:${Math.min(100, n/(MIN_OBS+1)*100).toFixed(0)}%"></i></span>
+    </div>`;
+  }
+
+  // ---- benchmarks ----
+  const bench = ['SPY','QQQ','EWU','EWG'];
+  document.getElementById('bench').innerHTML = bench.filter(s => latest.quotes[s]).map(s => {
+    const q = latest.quotes[s];
+    return `<div class="card">
+      <div class="label">${esc(wl[s]?.name || s)}</div>
+      <div class="tick">${s}</div>
+      <div class="val" style="margin-top:8px">${fmt(q.c)}</div>
+      <div class="chg ${cls(q.dp)}">${pct(q.dp)}</div>
+    </div>`;
+  }).join('');
+
+  // ---- anomaly screen ----
+  const rows = [];
+  for (const [sym, hist_] of Object.entries(ser)){
+    const today = hist_[hist_.length - 1];
+    const prior = hist_.slice(0, -1).map(d => d.dp);
+    let z = null;
+    if (prior.length >= MIN_OBS){
+      const sd = stdev(prior);
+      if (sd > 0) z = (today.dp - mean(prior)) / sd;
+    }
+    rows.push({sym, name: wl[sym]?.name || sym, dp: today.dp, z, obs: prior.length});
+  }
+
+  rows.sort((a,b) => {
+    if (a.z !== null && b.z !== null) return Math.abs(b.z) - Math.abs(a.z);
+    if (a.z !== null) return -1;
+    if (b.z !== null) return 1;
+    return Math.abs(b.dp) - Math.abs(a.dp);
+  });
+
+  document.getElementById('anomNote').textContent = ready
+    ? `Scored against ${n - 1} prior sessions. Sorted by absolute z-score.`
+    : `Insufficient history to score. Showing today's moves by size, largest first.`;
+
+  document.getElementById('anomTable').innerHTML = `
+    <thead><tr>
+      <th>Symbol</th><th>Asset</th><th style="text-align:right">Change</th>
+      <th style="text-align:right">Z-score</th><th>Status</th>
+    </tr></thead>
+    <tbody>${rows.map(r => {
+      let z = '<span class="desc">—</span>', status;
+      if (r.z === null){
+        status = `<span class="pill n">${r.obs}/${MIN_OBS} obs</span>`;
+      } else {
+        z = `<span class="${Math.abs(r.z) >= 2 ? (r.z > 0 ? 'up' : 'down') : ''}">${r.z >= 0 ? '+' : ''}${r.z.toFixed(2)}</span>`;
+        status = Math.abs(r.z) >= 2
+          ? `<span class="pill ${r.z > 0 ? 'o' : 'u'}">flagged</span>`
+          : `<span class="pill n">normal</span>`;
+      }
+      return `<tr>
+        <td class="sym">${r.sym}</td>
+        <td class="desc">${esc(r.name)}</td>
+        <td class="num ${cls(r.dp)}">${pct(r.dp)}</td>
+        <td class="num">${z}</td>
+        <td>${status}</td>
+      </tr>`;
+    }).join('')}</tbody>`;
+
+  // ---- sector rotation ----
+  const spy = latest.quotes.SPY?.dp ?? 0;
+  const sectors = Object.entries(latest.quotes)
+    .filter(([s]) => wl[s]?.cls === 'sector')
+    .map(([s,q]) => ({sym:s, name:wl[s].name, dp:q.dp, rel:q.dp - spy}))
+    .sort((a,b) => b.rel - a.rel);
+
+  document.getElementById('rotTable').innerHTML = `
+    <thead><tr>
+      <th>Sector</th><th>Symbol</th><th style="text-align:right">Change</th>
+      <th style="text-align:right">vs S&amp;P</th><th>Relative</th>
+    </tr></thead>
+    <tbody>${sectors.map(s => `<tr>
+      <td>${esc(s.name)}</td>
+      <td class="sym">${s.sym}</td>
+      <td class="num ${cls(s.dp)}">${pct(s.dp)}</td>
+      <td class="num ${cls(s.rel)}">${pct(s.rel)}</td>
+      <td><span class="pill ${s.rel > 0.15 ? 'o' : s.rel < -0.15 ? 'u' : 'n'}">${
+        s.rel > 0.15 ? 'outperforming' : s.rel < -0.15 ? 'lagging' : 'in line'
+      }</span></td>
+    </tr>`).join('')}</tbody>`;
+
+  // ---- macro table ----
+  const macro = Object.entries(latest.quotes)
+    .filter(([s]) => ['commodity','fx','rates'].includes(wl[s]?.cls))
+    .map(([s,q]) => ({sym:s, name:wl[s].name, cls:wl[s].cls, ...q}))
+    .sort((a,b) => a.cls.localeCompare(b.cls) || b.dp - a.dp);
+
+  const clsName = {commodity:'Commodity', fx:'Currency', rates:'Rates'};
+  document.getElementById('macroTable').innerHTML = `
+    <thead><tr>
+      <th>Asset</th><th>Proxy</th><th>Class</th>
+      <th style="text-align:right">Last</th><th style="text-align:right">Change</th>
+    </tr></thead>
+    <tbody>${macro.map(m => `<tr>
+      <td>${esc(m.name)}</td>
+      <td class="sym">${m.sym}</td>
+      <td class="desc">${clsName[m.cls]}</td>
+      <td class="num">${fmt(m.c)}</td>
+      <td class="num ${cls(m.dp)}">${pct(m.dp)}</td>
+    </tr>`).join('')}</tbody>`;
+
+  // ---- news ----
+  const news = meta.news || [];
+  document.getElementById('news').innerHTML = news.length
+    ? news.map(a => `<li>
+        <a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.headline)}</a>
+        <div class="meta">${esc(a.source)} · ${new Date(a.datetime * 1000).toISOString().slice(0,10)}</div>
+      </li>`).join('')
+    : '<li class="desc">No headlines in the last snapshot.</li>';
+
+  // ---- footer ----
+  document.getElementById('foot').innerHTML =
+    `Data: Finnhub (quotes, headlines). Collected ${n} session${n===1?'':'s'}, ` +
+    `${Object.keys(latest.quotes).length} symbols. Not investment advice.`;
+}
+
+// Prefer the live file (GitHub Pages); fall back to the build-time copy.
+fetch('history.json', {cache: 'no-store'})
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(render)
+  .catch(() => render(INLINE || {meta:{}, snapshots:[]}));
+</script>
+</body>
+</html>

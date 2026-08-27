@@ -1,0 +1,366 @@
+{
+  "meta": {
+    "watchlist": {
+      "SPY": {
+        "name": "S&P 500",
+        "cls": "index"
+      },
+      "QQQ": {
+        "name": "Nasdaq 100",
+        "cls": "index"
+      },
+      "IWM": {
+        "name": "Russell 2000",
+        "cls": "index"
+      },
+      "EWU": {
+        "name": "UK / FTSE",
+        "cls": "index"
+      },
+      "EWG": {
+        "name": "Germany / DAX",
+        "cls": "index"
+      },
+      "EFA": {
+        "name": "Developed ex-US",
+        "cls": "index"
+      },
+      "EEM": {
+        "name": "Emerging Markets",
+        "cls": "index"
+      },
+      "USO": {
+        "name": "WTI Crude",
+        "cls": "commodity"
+      },
+      "BNO": {
+        "name": "Brent Crude",
+        "cls": "commodity"
+      },
+      "GLD": {
+        "name": "Gold",
+        "cls": "commodity"
+      },
+      "SLV": {
+        "name": "Silver",
+        "cls": "commodity"
+      },
+      "UNG": {
+        "name": "Natural Gas",
+        "cls": "commodity"
+      },
+      "DBA": {
+        "name": "Agriculture",
+        "cls": "commodity"
+      },
+      "UUP": {
+        "name": "US Dollar Index",
+        "cls": "fx"
+      },
+      "FXE": {
+        "name": "Euro",
+        "cls": "fx"
+      },
+      "FXB": {
+        "name": "British Pound",
+        "cls": "fx"
+      },
+      "FXY": {
+        "name": "Japanese Yen",
+        "cls": "fx"
+      },
+      "TLT": {
+        "name": "20Y+ Treasuries",
+        "cls": "rates"
+      },
+      "XLE": {
+        "name": "Energy",
+        "cls": "sector"
+      },
+      "XLK": {
+        "name": "Technology",
+        "cls": "sector"
+      },
+      "XLF": {
+        "name": "Financials",
+        "cls": "sector"
+      },
+      "XLU": {
+        "name": "Utilities",
+        "cls": "sector"
+      },
+      "XLV": {
+        "name": "Healthcare",
+        "cls": "sector"
+      },
+      "XLI": {
+        "name": "Industrials",
+        "cls": "sector"
+      }
+    },
+    "last_updated": "2026-08-27T14:33:34.737070+00:00",
+    "snapshot_count": 1,
+    "news": [
+      {
+        "headline": "Family offices are making a bullish bet on the stock market, according to CNBC Family Office Portfolio Tracker",
+        "summary": "The data includes the portfolios of hundreds of family offices, representing a total of $1.4 trillion in assets.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/08/27/family-offices-making-bullish-bet-on-stocks-according-to-cnbc-tracker.html",
+        "datetime": 1787838029
+      },
+      {
+        "headline": "This is \u2018one of the worst\u2019 credit card habits, experts say\u201441% of cardholders do it",
+        "summary": "Missing a credit card payment can damage your credit for years, while paying only the minimum can leave you in debt for decades.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/08/27/this-is-one-of-the-worst-credit-card-habits-41percent-of-cardholders-do-it.html",
+        "datetime": 1787835602
+      },
+      {
+        "headline": "Kansas City Fed's Schmid says inflation 'stubborn' and 'sticky,' policy rate not restrictive",
+        "summary": "The policymaker stopped just short of calling for an interest rate hike.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/08/27/kansas-city-feds-schmid-says-inflation-stubborn-and-sticky-policy-rate-not-restrictive.html",
+        "datetime": 1787833230
+      },
+      {
+        "headline": "American Airlines adds batch of new international routes on its XLR planes",
+        "summary": "American is adding seven routes to its 2027 schedule, with the majority heading to smaller European cities from its Philadelphia hub or from New York City.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/08/27/american-airlines-routes-xlr.html",
+        "datetime": 1787832001
+      },
+      {
+        "headline": "What the Buss family Lakers dispute can teach the wealthy about trusts",
+        "summary": "Jeanie Buss, governor of the Lakers, is contesting her siblings' decision to sell the family's remaining stake in the NBA team.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/08/27/buss-family-lakers-trust-dispute.html",
+        "datetime": 1787830494
+      },
+      {
+        "headline": "After six months, the Iran war has reached its endgame - a costly stalemate - Reuters",
+        "summary": "After six months, the Iran war has reached its endgame - a costly stalemate\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPanlhWGJGcHdKencyMnlRUHBUejVOZlByMTJjWm8wSVVOdWRZV3FBQUlFNFI1WXVqTUdQaEtFeEJkeHl4aTEwaXJmd0MwTFY4VmJOMS02cWJ6ZGZzVEczaGFNelFqdmJoeFNhMGlzNzVzQ3hQOVFtejNvRXZqcVBQek5zY2l2VERfVlk4aHd3WXQ4YTc0MVhIdXF6ZHA4bFVBRlNNWXlKS0ZnbU1JdFo3MWFzMDg?oc=5",
+        "datetime": 1787828057
+      },
+      {
+        "headline": "OPEC+ loses oil market sway in Iran war as China gains influence - Reuters",
+        "summary": "OPEC+ loses oil market sway in Iran war as China gains influence\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOdzQ5cjA0LVhLZTN3aEpkcDBvMXNmV3BnTHVtMFBzZnFfN05PSXFjZFAyUTZ3OEtBTnVCRDhIQXkwbGMwUFZSSTBLek9IbmNqTG16bGdlVlVjOHZ1ZER2c3Z5aXJuaV95ZFFObV9XZlYwNHNqdXcxN2FzeVRkSDF1OURPRThrUHhjOThzTEFyY1NBSG10Zlh4VXRTQWhzMXg3TGJINkRyWGhHLTd1NHc?oc=5",
+        "datetime": 1787814865
+      },
+      {
+        "headline": "Six months of war: How the Middle East conflict has shaped financial markets - Reuters",
+        "summary": "Six months of war: How the Middle East conflict has shaped financial markets\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQdzZPbXZOMTI2d1doSndZUnZ4VTVxV2hlUzFvRmJyUHpXRnlTNUV2bk13WS1rVTNnYmRLbzE4VkN0RlpiUG1MakRKUUpRNkNkYVg3d2s4aXhBaWpUb3ZYd0poN1BlRndYTVk5enNRckZmWS1lQklIRWtTMFBUdW5raDJUWTRzeUdCQTBCRDBpTkhVcDBnMlo4dTFPVXJqT3ExcTQ0aFUzV1pjak1YSzNYdkJDZ0h1UjhKRG91Qw?oc=5",
+        "datetime": 1787810760
+      },
+      {
+        "headline": "Pernod warns weak US, China will weigh in years to come - Reuters",
+        "summary": "Pernod warns weak US, China will weigh in years to come\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQZ25ZQWhhZ0E1SWliYi1GZ3RSQTNwUFZtZkN2Qmw4R2RBUXVfSGhhZ09Oc0ZXMWk0enNhYmxkR0F6WWJYU0NkVDFDUHZmb2NpbkFIZzhhM1dWMkEwRGtmT3UwTG9vVXpaY0d1Vkc0Q1I4VXMzckEtSlIzbVEwbTNWVDlZamRlWUVYdWdCcFVFakxKbEJYbU85c2FNRm9CWG1hcjhmdXpWb0VqOVRFMmNmbnVDSE5vY2xINWhLVWNoTE91bnBDTHJZVnpTQUU?oc=5",
+        "datetime": 1787808900
+      },
+      {
+        "headline": "Six consequences of six months of war in Iran - Reuters",
+        "summary": "Six consequences of six months of war in Iran\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOUEV1S2tFLUNEVG9hdmJ3dEF5YlBmWk8xT0wwWXN3MzZGOVYzX0xITXRLbGNuTUtscXl1Sy10NHlaelVXUHMzZVNYMm42TUVmNVN6UW1pLXV3MDF4YXpaLV82VE5QdXI3R19HemNya2U5LTg1RGFTZXdvdjZ6blJwUWllYVEyaE02cmoyVmdSU3o3SzNZ?oc=5",
+        "datetime": 1787807160
+      },
+      {
+        "headline": "Bessent, Warsh diverge on who should set the price of money - Reuters",
+        "summary": "Bessent, Warsh diverge on who should set the price of money\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQaFNYemtDLVI0aVJranpORkVlX0ppenZITDhaMnRYU2xVV0VIajlPb1g0a1FXMXJENnByeEFYODExUUVZUWluUUZKU2FvRy1ZcFNTMm91azBEWmFvTU5fbUd4UnFjOTFPSC1GQjVVdG9NbnAySkstMkdtcXpZNWZXVThlX2FzQWN4ZmxZazZCNVd5NTF3MnkxNXlEV1hSWTQ2RkFn?oc=5",
+        "datetime": 1787806980
+      },
+      {
+        "headline": "EXCLUSIVE: Pentagon's NATO review preparing troop options for Hegseth by November 6 - Reuters",
+        "summary": "EXCLUSIVE: Pentagon's NATO review preparing troop options for Hegseth by November 6\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQdWRFTVVLeWNzcWswcTRJV0xyVkRqUkhkY0M4M01xck5KRDlyakVkaVU2Rk1FX2NBM1ZiRFVHUUczS19BbmpjVXBXeWNtOENJbFMyVjNDbGlnZEpHdVl3NEc1aEhJd3Nvem5ybFlacDlCWWQybkhDUVhqOTVHWXhaMjNleFVUZWxJVktnaHRMS2pRWUd1OXctZXRVa08wbTJCTGxSVEFjdDB6eFhfNEE?oc=5",
+        "datetime": 1787806860
+      }
+    ]
+  },
+  "snapshots": [
+    {
+      "date": "2026-08-27",
+      "collected_at": "2026-08-27T14:33:34.737016+00:00",
+      "quotes": {
+        "SPY": {
+          "c": 769.35,
+          "pc": 766.08,
+          "dp": 0.4268,
+          "h": 769.88,
+          "l": 767.16
+        },
+        "QQQ": {
+          "c": 718.26,
+          "pc": 711.37,
+          "dp": 0.9686,
+          "h": 719.29,
+          "l": 714.525
+        },
+        "IWM": {
+          "c": 298.55,
+          "pc": 298.93,
+          "dp": -0.1271,
+          "h": 299.625,
+          "l": 298.14
+        },
+        "EWU": {
+          "c": 48.54,
+          "pc": 48.86,
+          "dp": -0.6549,
+          "h": 48.78,
+          "l": 48.48
+        },
+        "EWG": {
+          "c": 44.38,
+          "pc": 44.32,
+          "dp": 0.1354,
+          "h": 44.54,
+          "l": 44.34
+        },
+        "EFA": {
+          "c": 107.74,
+          "pc": 108.27,
+          "dp": -0.4895,
+          "h": 108.14,
+          "l": 107.605
+        },
+        "EEM": {
+          "c": 67.46,
+          "pc": 67.17,
+          "dp": 0.4317,
+          "h": 67.69,
+          "l": 67.205
+        },
+        "USO": {
+          "c": 128.63,
+          "pc": 127.35,
+          "dp": 1.0051,
+          "h": 129.2215,
+          "l": 127.305
+        },
+        "BNO": {
+          "c": 51.22,
+          "pc": 50.54,
+          "dp": 1.3455,
+          "h": 51.415,
+          "l": 50.67
+        },
+        "GLD": {
+          "c": 420.26,
+          "pc": 421.32,
+          "dp": -0.2516,
+          "h": 421.3225,
+          "l": 418.43
+        },
+        "SLV": {
+          "c": 61.81,
+          "pc": 61.59,
+          "dp": 0.3572,
+          "h": 61.8401,
+          "l": 61.08
+        },
+        "UNG": {
+          "c": 10.6,
+          "pc": 10.41,
+          "dp": 1.8252,
+          "h": 10.7295,
+          "l": 10.485
+        },
+        "DBA": {
+          "c": 28.69,
+          "pc": 28.59,
+          "dp": 0.3498,
+          "h": 28.7,
+          "l": 28.59
+        },
+        "UUP": {
+          "c": 28,
+          "pc": 28.02,
+          "dp": -0.0714,
+          "h": 28.0176,
+          "l": 27.99
+        },
+        "FXE": {
+          "c": 107.59,
+          "pc": 107.6,
+          "dp": -0.0093,
+          "h": 107.66000000000001,
+          "l": 107.542
+        },
+        "FXB": {
+          "c": 130.77,
+          "pc": 130.7526,
+          "dp": 0.0133,
+          "h": 130.79999999999998,
+          "l": 130.74
+        },
+        "FXY": {
+          "c": 57.51,
+          "pc": 57.55,
+          "dp": -0.0695,
+          "h": 57.55,
+          "l": 57.51
+        },
+        "TLT": {
+          "c": 83.17,
+          "pc": 83.3,
+          "dp": -0.1561,
+          "h": 83.275,
+          "l": 83.1101
+        },
+        "XLE": {
+          "c": 61.81,
+          "pc": 62.43,
+          "dp": -0.9931,
+          "h": 62.45,
+          "l": 61.76
+        },
+        "XLK": {
+          "c": 187.33,
+          "pc": 182.84,
+          "dp": 2.4557,
+          "h": 187.7,
+          "l": 185.67
+        },
+        "XLF": {
+          "c": 57.78,
+          "pc": 58.26,
+          "dp": -0.8239,
+          "h": 58.23,
+          "l": 57.73
+        },
+        "XLU": {
+          "c": 43.2,
+          "pc": 43.51,
+          "dp": -0.7125,
+          "h": 43.34,
+          "l": 42.92
+        },
+        "XLV": {
+          "c": 172.28,
+          "pc": 173.54,
+          "dp": -0.7261,
+          "h": 172.7,
+          "l": 171.49
+        },
+        "XLI": {
+          "c": 178.94,
+          "pc": 180.34,
+          "dp": -0.7763,
+          "h": 180.49,
+          "l": 178.18
+        }
+      }
+    }
+  ]
+}

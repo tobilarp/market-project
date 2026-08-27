@@ -88,7 +88,7 @@ def get_quote(symbol):
     }
 
 
-def get_news(limit=12):
+def get_news(limit=40):
     data = fetch(
         f"https://finnhub.io/api/v1/news?category=general&token={FINNHUB_KEY}"
     )

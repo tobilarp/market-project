@@ -6,119 +6,186 @@
 <title>Market Anomaly Dashboard</title>
 <style>
   :root{
-    --bg:#f7f8fa; --panel:#ffffff; --border:#e3e6ec; --ink:#12161f;
-    --muted:#67708a; --faint:#9aa2b8;
-    --up:#0a7d5a; --down:#c0392f; --flat:#67708a;
-    --accent:#2f5fd0; --warn:#b5761b;
-    --up-bg:#e6f4ef; --down-bg:#fdeceb; --warn-bg:#fdf3e3;
+    color-scheme: light;
+    --plane:#f9f9f7; --surface:#fcfcfb; --raised:#ffffff;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+
+    --up:#006300; --down:#c0392f;
+    --pos:#2a78d6;  --neg:#e34948;  --mid:#f0efec;
+
+    --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+
+    --c-index:#2a78d6; --c-commodity:#eb6834; --c-fx:#1baf7a;
+    --c-rates:#eda100; --c-sector:#e87ba4;
+
+    --wash-blue:#eef4fd; --wash-amber:#fdf6e8; --wash-green:#eaf6ef;
     --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   }
   @media (prefers-color-scheme:dark){
-    :root{
-      --bg:#0d1017; --panel:#151a24; --border:#252c3a; --ink:#e8ecf4;
-      --muted:#98a2b8; --faint:#6b7488;
-      --up:#3ddc9a; --down:#ff6b5e; --flat:#98a2b8;
-      --accent:#7aa2f7; --warn:#e0a458;
-      --up-bg:#123027; --down-bg:#331d1c; --warn-bg:#2e2415;
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --plane:#0d0d0d; --surface:#1a1a19; --raised:#20201e;
+      --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+
+      --up:#0ca30c; --down:#ff6b5e;
+      --pos:#3987e5; --neg:#e66767; --mid:#383835;
+
+      --c-index:#3987e5; --c-commodity:#d95926; --c-fx:#199e70;
+      --c-rates:#c98500; --c-sector:#d55181;
+
+      --wash-blue:#141d2b; --wash-amber:#241f13; --wash-green:#122019;
     }
   }
   *{box-sizing:border-box}
   body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    -webkit-font-smoothing:antialiased;
+    margin:0; background:var(--plane); color:var(--ink);
+    font:15px/1.6 var(--sans); -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:1180px; margin:0 auto; padding:40px 24px 72px}
+  .wrap{max-width:1120px; margin:0 auto; padding:40px 22px 80px}
 
-  header{margin-bottom:32px}
-  h1{font-size:26px; margin:0 0 6px; letter-spacing:-.02em; font-weight:650}
-  .sub{color:var(--muted); font-size:14px; margin:0}
-  .stamp{color:var(--faint); font-size:12.5px; margin-top:10px; font-family:var(--mono)}
+  /* ---------- header ---------- */
+  header{margin-bottom:26px}
+  h1{font-size:27px; margin:0 0 6px; letter-spacing:-.022em; font-weight:660}
+  .sub{color:var(--ink-2); font-size:14.5px; margin:0; max-width:60ch}
+  .stamp{color:var(--muted); font-size:12.5px; margin-top:11px; font-family:var(--mono)}
+
+  /* ---------- hero line ---------- */
+  .hero{
+    background:var(--wash-blue); border:1px solid var(--ring);
+    border-radius:12px; padding:20px 22px; margin:24px 0 34px;
+  }
+  .hero .eyebrow{
+    font-size:11px; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--ink-2); font-weight:660; margin-bottom:7px;
+  }
+  .hero p{margin:0; font-size:17px; line-height:1.5; letter-spacing:-.008em}
+  .hero .em{font-weight:640}
 
   .banner{
-    background:var(--warn-bg); border:1px solid var(--border);
+    background:var(--wash-amber); border:1px solid var(--ring);
     border-left:3px solid var(--warn);
-    border-radius:8px; padding:14px 16px; margin:24px 0 32px;
-    font-size:13.5px; color:var(--ink);
+    border-radius:10px; padding:14px 16px; margin:0 0 34px; font-size:13.5px;
   }
   .banner b{font-weight:640}
-  .banner .prog{
-    font-family:var(--mono); font-size:12px; color:var(--muted);
-    margin-top:8px; display:block;
-  }
-  .bar{
-    height:4px; background:var(--border); border-radius:2px;
-    margin-top:6px; overflow:hidden; max-width:280px;
-  }
+  .bar{height:4px; background:var(--grid); border-radius:2px; margin-top:9px; max-width:300px; overflow:hidden}
   .bar i{display:block; height:100%; background:var(--warn); border-radius:2px}
 
-  section{margin-bottom:40px}
-  h2{
-    font-size:12px; text-transform:uppercase; letter-spacing:.09em;
-    color:var(--muted); font-weight:650; margin:0 0 4px;
+  /* ---------- sections ---------- */
+  section{margin-bottom:42px}
+  h2{font-size:12px; text-transform:uppercase; letter-spacing:.095em;
+     color:var(--ink-2); font-weight:660; margin:0 0 5px}
+  .note{color:var(--muted); font-size:13px; margin:0 0 16px; max-width:72ch}
+
+  /* ---------- stat tiles ---------- */
+  .kpi{display:grid; gap:13px; grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+  .tile{
+    background:var(--surface); border:1px solid var(--ring);
+    border-radius:11px; padding:16px 17px; position:relative; overflow:hidden;
   }
-  .note{color:var(--faint); font-size:13px; margin:0 0 14px}
+  .tile::before{content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--c-index)}
+  .tile .lab{font-size:12.5px; color:var(--ink-2); font-weight:560}
+  .tile .tick{font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:1px}
+  .tile .val{font-size:25px; font-weight:660; letter-spacing:-.024em; margin-top:9px}
+  .tile .chg{font-size:13.5px; font-weight:640; font-family:var(--mono); margin-top:2px}
 
-  .grid{display:grid; gap:14px}
-  .g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--muted)}
 
-  .card{
-    background:var(--panel); border:1px solid var(--border);
-    border-radius:10px; padding:16px 18px;
+  /* ---------- narrative cards ---------- */
+  .cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+  .ncard{
+    background:var(--surface); border:1px solid var(--ring);
+    border-radius:11px; padding:18px 19px;
   }
-  .card .label{font-size:12.5px; color:var(--muted); margin-bottom:2px}
-  .card .name{font-size:14px; font-weight:600; margin-bottom:8px}
-  .card .val{font-size:24px; font-weight:650; letter-spacing:-.02em; font-family:var(--mono)}
-  .card .chg{font-size:13.5px; font-weight:600; margin-top:2px; font-family:var(--mono)}
-  .tick{font-family:var(--mono); font-size:11.5px; color:var(--faint)}
+  .ncard .top{display:flex; align-items:baseline; gap:9px; margin-bottom:9px; flex-wrap:wrap}
+  .ncard .figure{font-size:22px; font-weight:660; letter-spacing:-.02em; font-family:var(--mono)}
+  .ncard .who{font-size:14px; font-weight:620}
+  .ncard p{margin:0 0 12px; font-size:13.5px; color:var(--ink-2); line-height:1.55}
+  .ncard .hl{border-top:1px solid var(--grid); padding-top:11px; margin-top:12px}
+  .ncard .hl-lab{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--muted); font-weight:660; margin-bottom:7px;
+  }
+  .ncard .hl a{display:block; color:var(--ink); text-decoration:none;
+    font-size:12.5px; line-height:1.45; margin-bottom:6px; font-weight:540}
+  .ncard .hl a:hover{color:var(--pos); text-decoration:underline}
+  .ncard .hl .src{font-family:var(--mono); font-size:10.5px; color:var(--muted); font-weight:400}
+  .caveat{font-size:11.5px; color:var(--muted); font-style:italic; margin-top:9px; line-height:1.45}
 
-  .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+  /* ---------- diverging bars ---------- */
+  .chart{background:var(--surface); border:1px solid var(--ring); border-radius:11px; padding:20px 22px}
+  .legend{display:flex; gap:18px; margin-bottom:16px; font-size:12px; color:var(--ink-2); flex-wrap:wrap}
+  .legend span{display:flex; align-items:center; gap:6px}
+  .sw{width:11px; height:11px; border-radius:3px; display:inline-block}
+  .rows{display:flex; flex-direction:column; gap:9px}
+  .row{display:grid; grid-template-columns:118px 1fr 62px; align-items:center; gap:12px}
+  .row .nm{font-size:13px; color:var(--ink-2); text-align:right; white-space:nowrap;
+           overflow:hidden; text-overflow:ellipsis}
+  .track{position:relative; height:22px; background:linear-gradient(var(--grid),var(--grid)) center/100% 1px no-repeat}
+  .zero{position:absolute; top:0; bottom:0; width:1px; background:var(--axis); left:50%}
+  .fill{position:absolute; top:4px; height:14px; border-radius:0}
+  .fill.p{background:var(--pos); border-radius:0 4px 4px 0}
+  .fill.n{background:var(--neg); border-radius:4px 0 0 4px}
+  .row .v{font-family:var(--mono); font-size:12.5px; font-variant-numeric:tabular-nums; text-align:right}
+  .row:hover .fill{filter:brightness(1.08)}
+  .row .track[title]{cursor:help}
 
+  /* ---------- tables ---------- */
+  .scroll{overflow-x:auto; border:1px solid var(--ring); border-radius:11px; background:var(--surface)}
   table{width:100%; border-collapse:collapse; font-size:14px}
-  .scroll{overflow-x:auto; border:1px solid var(--border); border-radius:10px; background:var(--panel)}
-  th{
-    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.07em;
-    color:var(--muted); font-weight:640; padding:11px 14px;
-    border-bottom:1px solid var(--border); white-space:nowrap;
-  }
-  td{padding:11px 14px; border-bottom:1px solid var(--border); white-space:nowrap}
+  th{text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.075em;
+     color:var(--muted); font-weight:660; padding:11px 14px;
+     border-bottom:1px solid var(--grid); white-space:nowrap}
+  td{padding:10px 14px; border-bottom:1px solid var(--grid); white-space:nowrap}
   tr:last-child td{border-bottom:none}
-  td.num{text-align:right; font-family:var(--mono); font-size:13px}
-  .sym{font-family:var(--mono); font-weight:640; font-size:13px}
-  .desc{color:var(--muted); font-size:13px}
+  tbody tr:hover{background:var(--raised)}
+  td.num{text-align:right; font-family:var(--mono); font-size:13px; font-variant-numeric:tabular-nums}
+  .sym{font-family:var(--mono); font-weight:640; font-size:12.5px}
+  .desc{color:var(--ink-2); font-size:13px}
 
-  .pill{
-    display:inline-block; padding:2px 8px; border-radius:20px;
-    font-size:11px; font-weight:640; letter-spacing:.02em;
-  }
-  .pill.o{background:var(--up-bg); color:var(--up)}
-  .pill.u{background:var(--down-bg); color:var(--down)}
-  .pill.n{background:var(--bg); color:var(--muted); border:1px solid var(--border)}
+  .chip{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-2)}
+  .chip i{width:8px; height:8px; border-radius:2px; display:inline-block}
 
-  .news li{
-    list-style:none; padding:13px 0; border-bottom:1px solid var(--border);
-  }
-  .news{margin:0; padding:0}
-  .news li:last-child{border-bottom:none}
-  .news a{color:var(--ink); text-decoration:none; font-weight:560; font-size:14px}
-  .news a:hover{color:var(--accent); text-decoration:underline}
-  .news .meta{font-size:12px; color:var(--faint); margin-top:3px; font-family:var(--mono)}
+  .pill{display:inline-flex; align-items:center; gap:5px; padding:3px 9px;
+        border-radius:20px; font-size:11px; font-weight:640}
+  .pill.hi{background:var(--wash-blue); color:var(--pos)}
+  .pill.lo{background:var(--wash-amber); color:var(--crit)}
+  .pill.n{background:var(--plane); color:var(--muted); border:1px solid var(--grid)}
+  .pill .dot{width:6px; height:6px; border-radius:50%; background:currentColor}
 
-  .method{
-    background:var(--panel); border:1px solid var(--border);
-    border-radius:10px; padding:20px 22px; font-size:13.5px; color:var(--muted);
+  /* ---------- analyst note ---------- */
+  .note-card{
+    background:var(--wash-green); border:1px solid var(--ring);
+    border-left:3px solid var(--good); border-radius:11px; padding:20px 22px;
   }
+  .note-card .by{font-size:11px; text-transform:uppercase; letter-spacing:.09em;
+                 color:var(--ink-2); font-weight:660; margin-bottom:10px}
+  .note-card p{margin:0 0 11px; font-size:14px; line-height:1.62}
+  .note-card p:last-child{margin-bottom:0}
+  .note-card em{color:var(--ink-2)}
+
+  /* ---------- explainer ---------- */
+  .explain{display:grid; gap:13px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .ex{background:var(--surface); border:1px solid var(--ring); border-radius:11px; padding:16px 18px}
+  .ex h3{font-size:13.5px; margin:0 0 7px; font-weight:640}
+  .ex p{margin:0; font-size:13px; color:var(--ink-2); line-height:1.55}
+
+  .method{background:var(--surface); border:1px solid var(--ring);
+          border-radius:11px; padding:20px 22px; font-size:13.5px; color:var(--ink-2)}
   .method h3{font-size:13px; color:var(--ink); margin:0 0 8px; font-weight:640}
-  .method p{margin:0 0 12px}
-  .method p:last-child{margin-bottom:0}
-  .method code{
-    font-family:var(--mono); font-size:12.5px; background:var(--bg);
-    padding:1px 5px; border-radius:4px; border:1px solid var(--border);
-  }
-  footer{
-    margin-top:48px; padding-top:20px; border-top:1px solid var(--border);
-    color:var(--faint); font-size:12.5px;
+  .method p{margin:0 0 13px} .method p:last-child{margin-bottom:0}
+  code{font-family:var(--mono); font-size:12.5px; background:var(--plane);
+       padding:1px 5px; border-radius:4px; border:1px solid var(--grid)}
+
+  footer{margin-top:50px; padding-top:20px; border-top:1px solid var(--grid);
+         color:var(--muted); font-size:12.5px}
+
+  @media(max-width:620px){
+    .row{grid-template-columns:92px 1fr 54px; gap:8px}
+    .row .nm{font-size:12px}
+    h1{font-size:23px}
   }
 </style>
 </head>
@@ -127,40 +194,69 @@
 
 <header>
   <h1>Market Anomaly Dashboard</h1>
-  <p class="sub">Tracks cross-asset moves and flags statistically unusual ones against a rolling baseline.</p>
+  <p class="sub">Tracks 24 cross-asset instruments and flags moves that are statistically unusual for that particular asset — not just large.</p>
   <p class="stamp" id="stamp">loading…</p>
 </header>
 
+<div id="hero"></div>
 <div id="banner"></div>
 
 <section>
   <h2>Benchmarks</h2>
-  <p class="note">Today's close vs. previous close.</p>
-  <div class="grid g3" id="bench"></div>
+  <p class="note">Latest close against the previous close.</p>
+  <div class="kpi" id="kpi"></div>
 </section>
 
 <section>
-  <h2>Anomaly Screen</h2>
+  <h2>What moved today</h2>
+  <p class="note">Descriptions below are generated from the price data itself. Headlines are shown as possible context — the dashboard does not establish that any headline caused any move.</p>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section>
+  <h2>Sector rotation</h2>
+  <p class="note">Each US sector's move relative to the S&amp;P 500. Bars right of the line outperformed the index; bars left of it lagged.</p>
+  <div class="chart" id="rot"></div>
+</section>
+
+<section>
+  <h2>Anomaly screen</h2>
   <p class="note" id="anomNote"></p>
   <div class="scroll"><table id="anomTable"></table></div>
 </section>
 
 <section>
-  <h2>Sector Rotation</h2>
-  <p class="note">Each sector's move relative to the S&amp;P 500 today. Positive means it outperformed the index.</p>
-  <div class="scroll"><table id="rotTable"></table></div>
-</section>
-
-<section>
-  <h2>Commodities &amp; Currencies</h2>
-  <p class="note">Tracked via liquid ETF proxies — see methodology.</p>
+  <h2>Commodities &amp; currencies</h2>
+  <p class="note">Tracked through liquid ETF proxies — see methodology.</p>
   <div class="scroll"><table id="macroTable"></table></div>
 </section>
 
 <section>
-  <h2>Market Headlines</h2>
-  <p class="note">General market news at time of collection, for cross-referencing against flagged moves.</p>
-  <ul class="news" id="news"></ul>
+  <h2>Analyst note</h2>
+  <p class="note">Written by hand, not generated. This is where interpretation lives — everything above is mechanical.</p>
+  <div class="note-card" id="commentary"></div>
+</section>
+
+<section>
+  <h2>How to read this</h2>
+  <div class="explain">
+    <div class="ex">
+      <h3>Why "unusual" beats "big"</h3>
+      <p>Natural gas routinely swings 3% in a day; long-dated Treasuries doing the same would be a serious event. Comparing every asset against its own history is what makes those two comparable.</p>
+    </div>
+    <div class="ex">
+      <h3>What a z-score is</h3>
+      <p>A count of standard deviations. A z of 2 means today's move is about twice as far from that asset's average day as its typical wobble — roughly a 1-in-20 session if returns were well behaved, which they aren't quite.</p>
+    </div>
+    <div class="ex">
+      <h3>Sector rotation, plainly</h3>
+      <p>Money moving between parts of the market rather than in or out of it. Technology leading while utilities lag is a different market from both falling together, even if the index closes flat.</p>
+    </div>
+    <div class="ex">
+      <h3>What a flag is worth</h3>
+      <p>It says "look here", nothing more. An earnings date, an index rebalance and a genuine dislocation all leave the same statistical footprint. Separating them is a judgement, which is what the analyst note is for.</p>
+    </div>
+  </div>
 </section>
 
 <section>
@@ -168,224 +264,299 @@
   <div class="method">
     <h3>How a move gets flagged</h3>
     <p>
-      Each trading day a collector records the closing quote for every symbol on the
-      watchlist. A symbol's daily percentage change is scored against the mean and
-      standard deviation of its own prior daily changes:
-      <code>z = (today − mean) / stdev</code>. A reading of <code>|z| ≥ 2</code> is
-      flagged — the move is roughly two standard deviations from how that asset
-      normally behaves, which is the definition of "anomalous" used here. Scoring
-      requires at least <code>10</code> prior observations; below that the screen
-      reports insufficient data rather than a number.
+      A collector records each symbol's closing quote every weekday. The daily percentage
+      change is scored against the mean and standard deviation of that symbol's own prior
+      daily changes: <code>z = (today − mean) / stdev</code>. A reading of <code>|z| ≥ 2</code>
+      is flagged. Scoring needs at least <code>10</code> prior observations; below that the
+      screen reports insufficient data rather than a number it can't support.
     </p>
     <h3>Why ETF proxies</h3>
     <p>
-      Finnhub's free tier covers equities but not futures or FX, so commodities and
-      foreign indices are tracked through liquid ETFs that hold or track them —
-      <code>USO</code> for WTI crude, <code>GLD</code> for gold, <code>EWU</code> for
-      UK equities, <code>FXB</code> for sterling. These carry tracking error and, for
-      the commodity funds, roll cost, so they are directional indicators rather than
-      spot prices.
+      The free data tier covers equities but not futures or FX, so commodities and foreign
+      indices are tracked through liquid ETFs that hold or follow them — <code>USO</code> for
+      WTI crude, <code>GLD</code> for gold, <code>EWU</code> for UK equities, <code>FXB</code>
+      for sterling. These carry tracking error and, for the commodity funds, roll cost, so they
+      are directional indicators rather than spot prices.
     </p>
     <h3>Known limits</h3>
     <p>
-      The baseline is built from daily closes only, so intraday moves are invisible.
-      A flag is a prompt to investigate, not a signal — an earnings date or an index
-      rebalance produces the same statistical footprint as a genuine dislocation, and
-      separating those requires reading the news, which is why headlines sit alongside
-      the screen.
+      Daily closes only, so intraday moves are invisible. The z-score assumes returns are
+      roughly normal — a convenient approximation rather than a true one, since real return
+      distributions have fatter tails, so <code>|z| ≥ 2</code> fires somewhat more often than
+      the textbook 5%. And nothing here knows <em>why</em> anything moved.
     </p>
   </div>
 </section>
 
 <footer id="foot"></footer>
-
 </div>
 
 <script>
 const INLINE = /*__HISTORY__*/null;
+const COMMENTARY = /*__COMMENTARY__*/"";
 const MIN_OBS = 10;
 
-const fmt = (n, d = 2) => n.toLocaleString('en-GB', {minimumFractionDigits: d, maximumFractionDigits: d});
-const pct = n => (n >= 0 ? '+' : '') + n.toFixed(2) + '%';
-const cls = n => n > 0.001 ? 'up' : n < -0.001 ? 'down' : 'flat';
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pct = n => (n>=0?'+':'') + n.toFixed(2) + '%';
+const pp  = n => Math.abs(n).toFixed(2) + (Math.abs(n)===1?' point':' points');
+const cl  = n => n>0.001?'up':n<-0.001?'down':'flat';
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => n.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2});
 
-function mean(a){ return a.reduce((x,y)=>x+y,0) / a.length; }
-function stdev(a){
-  if (a.length < 2) return 0;
-  const m = mean(a);
-  return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2, 0) / (a.length - 1));
+const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+const sd=a=>{if(a.length<2)return 0;const m=mean(a);return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2,0)/(a.length-1));};
+
+// Keyword themes used only to SURFACE headlines next to a mover.
+// Matching a keyword asserts topical overlap, never causation.
+const THEMES = {
+  USO:['oil','crude','opec','petroleum','barrel','energy','refin'],
+  BNO:['oil','crude','opec','brent','petroleum','barrel'],
+  UNG:['natural gas','gas price','lng'],
+  GLD:['gold','bullion','safe haven','precious metal'],
+  SLV:['silver','precious metal'],
+  DBA:['wheat','corn','crop','agricultur','grain','harvest'],
+  XLE:['oil','crude','energy','opec','drill','refin'],
+  XLK:['tech','chip','semiconductor',' ai ','artificial intelligence','software','cloud'],
+  XLF:['bank','lender','financial','credit','loan'],
+  XLU:['utility','utilities','power grid','electricity'],
+  XLV:['health','pharma','drug','biotech','medic'],
+  XLI:['industrial','manufactur','factory','airline','freight'],
+  TLT:['treasury','yield','bond','fed ','federal reserve','rate cut','rate hike','inflation'],
+  UUP:['dollar','greenback','currency','fed '],
+  FXE:['euro','ecb','eurozone'],
+  FXB:['sterling','pound','bank of england','uk econom'],
+  FXY:['yen','bank of japan','boj'],
+  SPY:['s&p','stock market','wall street','equit','tariff','trade war'],
+  QQQ:['nasdaq','tech','chip','semiconductor','artificial intelligence'],
+  IWM:['small cap','russell'],
+  EWU:['uk econom','britain','british','ftse','bank of england'],
+  EWG:['german','dax','europe econom'],
+  EFA:['global','international','europe','developed market'],
+  EEM:['emerging market','china','india','brazil']
+};
+
+function matchNews(sym, news, limit=3){
+  const keys = THEMES[sym] || [];
+  if(!keys.length) return [];
+  return news.filter(a=>{
+    const t=(a.headline+' '+(a.summary||'')).toLowerCase();
+    return keys.some(k=>t.includes(k));
+  }).slice(0,limit);
 }
 
-// Build per-symbol series of daily % changes, oldest first.
-function series(hist){
-  const out = {};
-  for (const snap of hist.snapshots){
-    for (const [sym, q] of Object.entries(snap.quotes)){
-      (out[sym] ||= []).push({date: snap.date, dp: q.dp, c: q.c});
-    }
-  }
+function seriesOf(hist){
+  const out={};
+  for(const s of hist.snapshots)
+    for(const [sym,q] of Object.entries(s.quotes))
+      (out[sym]??=[]).push({date:s.date, dp:q.dp, c:q.c});
   return out;
 }
 
 function render(hist){
-  const meta = hist.meta || {};
-  const wl = meta.watchlist || {};
-  const snaps = hist.snapshots || [];
-
-  if (!snaps.length){
-    document.getElementById('banner').innerHTML =
+  const meta=hist.meta||{}, wl=meta.watchlist||{}, snaps=hist.snapshots||[];
+  if(!snaps.length){
+    document.getElementById('hero').innerHTML =
       '<div class="banner"><b>No data collected yet.</b> Run <code>collect.py</code> to record the first snapshot.</div>';
-    document.getElementById('stamp').textContent = '';
+    document.getElementById('stamp').textContent='';
     return;
   }
 
-  const latest = snaps[snaps.length - 1];
-  const ser = series(hist);
-  const n = snaps.length;
+  const latest=snaps[snaps.length-1], q=latest.quotes, n=snaps.length;
+  const ser=seriesOf(hist), news=meta.news||[];
+  const nm=s=>wl[s]?.name||s;
 
-  // ---- stamp ----
-  const when = new Date(latest.collected_at);
   document.getElementById('stamp').textContent =
-    `Latest snapshot ${latest.date} · collected ${when.toISOString().slice(11,16)} UTC · ${n} day${n===1?'':'s'} on file`;
+    `Latest snapshot ${latest.date} · collected ${new Date(latest.collected_at).toISOString().slice(11,16)} UTC · ${n} session${n===1?'':'s'} on file`;
 
-  // ---- baseline banner ----
-  const ready = n > MIN_OBS;
-  const bn = document.getElementById('banner');
-  if (!ready){
-    const need = MIN_OBS + 1 - n;
-    bn.innerHTML = `<div class="banner">
-      <b>Baseline still building.</b> Anomaly scoring needs ${MIN_OBS} prior daily
-      observations per symbol before a z-score means anything. The collector has
-      recorded ${n}. Roughly ${need} more trading day${need===1?'':'s'} of collection
-      to go — until then the screen below reports raw moves without flags.
-      <span class="prog">${n} / ${MIN_OBS + 1} sessions</span>
-      <span class="bar"><i style="width:${Math.min(100, n/(MIN_OBS+1)*100).toFixed(0)}%"></i></span>
+  /* ---------- sector maths (drives the hero + chart) ---------- */
+  const spy = q.SPY?.dp ?? 0;
+  const sect = Object.entries(q)
+    .filter(([s])=>wl[s]?.cls==='sector')
+    .map(([s,v])=>({sym:s,name:nm(s),dp:v.dp,rel:v.dp-spy}))
+    .sort((a,b)=>b.rel-a.rel);
+
+  /* ---------- hero: mechanical one-liner ---------- */
+  const parts=[];
+  if(q.SPY){
+    parts.push(`The S&P 500 ${spy>0.05?'rose':spy<-0.05?'fell':'closed flat at'} <span class="em ${cl(spy)}">${pct(spy)}</span>`);
+  }
+  if(sect.length>1){
+    const L=sect[0], G=sect[sect.length-1];
+    parts.push(`<span class="em">${L.name}</span> led the sectors (${pct(L.rel)} against the index) while <span class="em">${G.name}</span> lagged (${pct(G.rel)})`);
+  }
+  const commods = Object.entries(q).filter(([s])=>wl[s]?.cls==='commodity')
+    .map(([s,v])=>({sym:s,name:nm(s),dp:v.dp}))
+    .sort((a,b)=>Math.abs(b.dp)-Math.abs(a.dp));
+  if(commods.length) parts.push(`the largest commodity move was <span class="em">${commods[0].name}</span> at ${pct(commods[0].dp)}`);
+
+  document.getElementById('hero').innerHTML = `<div class="hero">
+    <div class="eyebrow">Session summary · ${latest.date}</div>
+    <p>${parts.join('; ')}.</p>
+  </div>`;
+
+  /* ---------- baseline banner ---------- */
+  if(n<=MIN_OBS){
+    const need=MIN_OBS+1-n;
+    document.getElementById('banner').innerHTML=`<div class="banner">
+      <b>Baseline still building.</b> Scoring a move as unusual needs ${MIN_OBS} prior daily
+      observations per symbol before the number means anything. ${n} recorded so far —
+      about ${need} more trading day${need===1?'':'s'} to go. Until then the screen below
+      ranks raw moves by size and reports no flags.
+      <div class="bar"><i style="width:${Math.min(100,n/(MIN_OBS+1)*100).toFixed(0)}%"></i></div>
     </div>`;
   }
 
-  // ---- benchmarks ----
-  const bench = ['SPY','QQQ','EWU','EWG'];
-  document.getElementById('bench').innerHTML = bench.filter(s => latest.quotes[s]).map(s => {
-    const q = latest.quotes[s];
-    return `<div class="card">
-      <div class="label">${esc(wl[s]?.name || s)}</div>
-      <div class="tick">${s}</div>
-      <div class="val" style="margin-top:8px">${fmt(q.c)}</div>
-      <div class="chg ${cls(q.dp)}">${pct(q.dp)}</div>
-    </div>`;
-  }).join('');
+  /* ---------- KPI tiles ---------- */
+  document.getElementById('kpi').innerHTML = ['SPY','QQQ','EWU','EWG']
+    .filter(s=>q[s]).map(s=>`
+      <div class="tile">
+        <div class="lab">${esc(nm(s))}</div>
+        <div class="tick">${s}</div>
+        <div class="val">${fmt(q[s].c)}</div>
+        <div class="chg ${cl(q[s].dp)}">${q[s].dp>=0?'▲':'▼'} ${pct(q[s].dp)}</div>
+      </div>`).join('');
 
-  // ---- anomaly screen ----
-  const rows = [];
-  for (const [sym, hist_] of Object.entries(ser)){
-    const today = hist_[hist_.length - 1];
-    const prior = hist_.slice(0, -1).map(d => d.dp);
-    let z = null;
-    if (prior.length >= MIN_OBS){
-      const sd = stdev(prior);
-      if (sd > 0) z = (today.dp - mean(prior)) / sd;
-    }
-    rows.push({sym, name: wl[sym]?.name || sym, dp: today.dp, z, obs: prior.length});
+  /* ---------- narrative cards ---------- */
+  const subjects=[];
+  if(sect.length>1){
+    subjects.push({
+      sym:sect[0].sym, who:sect[0].name, figure:pct(sect[0].rel),
+      text:`Outperformed the S&P 500 by ${pp(sect[0].rel)} — the widest positive gap of any sector today. Its own move was ${pct(sect[0].dp)}.`
+    });
+    const G=sect[sect.length-1];
+    subjects.push({
+      sym:G.sym, who:G.name, figure:pct(G.rel),
+      text:`Lagged the index by ${pp(G.rel)}, the widest negative gap today. Its own move was ${pct(G.dp)}.`
+    });
+  }
+  if(commods.length){
+    const C=commods[0];
+    subjects.push({
+      sym:C.sym, who:C.name, figure:pct(C.dp),
+      text:`The largest single move across the commodity proxies this session, tracked via ${C.sym}.`
+    });
   }
 
-  rows.sort((a,b) => {
-    if (a.z !== null && b.z !== null) return Math.abs(b.z) - Math.abs(a.z);
-    if (a.z !== null) return -1;
-    if (b.z !== null) return 1;
-    return Math.abs(b.dp) - Math.abs(a.dp);
+  // Risk posture — describes a convention, asserts no cause.
+  const relOf=s=>(q[s]?.dp??spy)-spy;
+  const defensive=(relOf('XLU')+relOf('XLV'))/2;
+  const cyclical=(relOf('XLK')+relOf('XLI')+relOf('XLF'))/3;
+  let posture='';
+  if(Math.abs(cyclical-defensive)>0.25){
+    posture = cyclical>defensive
+      ? `Cyclical sectors finished ahead of defensives by ${pp(cyclical-defensive)} on average — the sector pattern conventionally described as risk-on.`
+      : `Defensive sectors finished ahead of cyclicals by ${pp(defensive-cyclical)} on average — the sector pattern conventionally described as risk-off.`;
+  } else {
+    posture = `Cyclical and defensive sectors finished within ${pp(Math.abs(cyclical-defensive))} of each other — no clear rotation either way.`;
+  }
+
+  document.getElementById('cards').innerHTML = subjects.map(s=>{
+    const hits=matchNews(s.sym,news);
+    return `<div class="ncard">
+      <div class="top">
+        <span class="figure ${cl(parseFloat(s.figure))}">${s.figure}</span>
+        <span class="who">${esc(s.who)}</span>
+      </div>
+      <p>${esc(s.text)}</p>
+      ${hits.length?`<div class="hl">
+        <div class="hl-lab">Headlines mentioning this area</div>
+        ${hits.map(a=>`<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.headline)}<br><span class="src">${esc(a.source)}</span></a>`).join('')}
+        <div class="caveat">Matched on topic keywords from the same session. Shown as context — no causal link is claimed or tested.</div>
+      </div>`:`<div class="hl"><div class="hl-lab">Headlines mentioning this area</div><p style="font-size:12.5px;margin:0">None in this session's feed.</p></div>`}
+    </div>`;
+  }).join('') + `<div class="ncard">
+      <div class="top"><span class="who">Risk posture</span></div>
+      <p>${esc(posture)}</p>
+      <div class="caveat">Derived from sector groupings only: cyclicals are technology, industrials and financials; defensives are utilities and healthcare.</div>
+    </div>`;
+
+  /* ---------- diverging sector bars ---------- */
+  const maxAbs=Math.max(...sect.map(s=>Math.abs(s.rel)),0.3);
+  document.getElementById('rot').innerHTML = `
+    <div class="legend">
+      <span><i class="sw" style="background:var(--pos)"></i> Outperformed the index</span>
+      <span><i class="sw" style="background:var(--neg)"></i> Lagged the index</span>
+    </div>
+    <div class="rows">
+      ${sect.map(s=>{
+        const w=Math.abs(s.rel)/maxAbs*50;
+        const style=s.rel>=0?`left:50%; width:${w}%`:`right:50%; width:${w}%`;
+        return `<div class="row">
+          <div class="nm">${esc(s.name)}</div>
+          <div class="track" title="${esc(s.name)} ${pct(s.dp)} · ${pct(s.rel)} vs index">
+            <div class="zero"></div>
+            <div class="fill ${s.rel>=0?'p':'n'}" style="${style}"></div>
+          </div>
+          <div class="v ${cl(s.rel)}">${pct(s.rel)}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+
+  /* ---------- anomaly table ---------- */
+  const rows=Object.entries(ser).map(([sym,h])=>{
+    const today=h[h.length-1], prior=h.slice(0,-1).map(d=>d.dp);
+    let z=null;
+    if(prior.length>=MIN_OBS){const s=sd(prior); if(s>0) z=(today.dp-mean(prior))/s;}
+    return {sym,name:nm(sym),cls:wl[sym]?.cls,dp:today.dp,z,obs:prior.length};
+  }).sort((a,b)=>{
+    if(a.z!==null&&b.z!==null) return Math.abs(b.z)-Math.abs(a.z);
+    if(a.z!==null) return -1; if(b.z!==null) return 1;
+    return Math.abs(b.dp)-Math.abs(a.dp);
   });
 
-  document.getElementById('anomNote').textContent = ready
-    ? `Scored against ${n - 1} prior sessions. Sorted by absolute z-score.`
-    : `Insufficient history to score. Showing today's moves by size, largest first.`;
+  document.getElementById('anomNote').textContent = n>MIN_OBS
+    ? `Scored against ${n-1} prior sessions, sorted by how far each move sits from that asset's own normal.`
+    : `Not enough history to score yet — showing today's moves by size, largest first.`;
 
-  document.getElementById('anomTable').innerHTML = `
-    <thead><tr>
-      <th>Symbol</th><th>Asset</th><th style="text-align:right">Change</th>
-      <th style="text-align:right">Z-score</th><th>Status</th>
-    </tr></thead>
-    <tbody>${rows.map(r => {
-      let z = '<span class="desc">—</span>', status;
-      if (r.z === null){
-        status = `<span class="pill n">${r.obs}/${MIN_OBS} obs</span>`;
-      } else {
-        z = `<span class="${Math.abs(r.z) >= 2 ? (r.z > 0 ? 'up' : 'down') : ''}">${r.z >= 0 ? '+' : ''}${r.z.toFixed(2)}</span>`;
-        status = Math.abs(r.z) >= 2
-          ? `<span class="pill ${r.z > 0 ? 'o' : 'u'}">flagged</span>`
-          : `<span class="pill n">normal</span>`;
+  document.getElementById('anomTable').innerHTML=`
+    <thead><tr><th>Symbol</th><th>Asset</th><th>Class</th>
+      <th style="text-align:right">Change</th><th style="text-align:right">Z-score</th><th>Status</th></tr></thead>
+    <tbody>${rows.map(r=>{
+      let zc='<span class="desc">—</span>', st;
+      if(r.z===null) st=`<span class="pill n">${r.obs}/${MIN_OBS} obs</span>`;
+      else{
+        const hot=Math.abs(r.z)>=2;
+        zc=`<span class="${hot?(r.z>0?'up':'down'):''}">${r.z>=0?'+':''}${r.z.toFixed(2)}</span>`;
+        st=hot?`<span class="pill ${r.z>0?'hi':'lo'}"><i class="dot"></i>flagged</span>`
+              :`<span class="pill n">normal</span>`;
       }
       return `<tr>
         <td class="sym">${r.sym}</td>
         <td class="desc">${esc(r.name)}</td>
-        <td class="num ${cls(r.dp)}">${pct(r.dp)}</td>
-        <td class="num">${z}</td>
-        <td>${status}</td>
-      </tr>`;
+        <td><span class="chip"><i style="background:var(--c-${r.cls||'index'})"></i>${esc(r.cls||'')}</span></td>
+        <td class="num ${cl(r.dp)}">${pct(r.dp)}</td>
+        <td class="num">${zc}</td>
+        <td>${st}</td></tr>`;
     }).join('')}</tbody>`;
 
-  // ---- sector rotation ----
-  const spy = latest.quotes.SPY?.dp ?? 0;
-  const sectors = Object.entries(latest.quotes)
-    .filter(([s]) => wl[s]?.cls === 'sector')
-    .map(([s,q]) => ({sym:s, name:wl[s].name, dp:q.dp, rel:q.dp - spy}))
-    .sort((a,b) => b.rel - a.rel);
+  /* ---------- macro table ---------- */
+  const macro=Object.entries(q).filter(([s])=>['commodity','fx','rates'].includes(wl[s]?.cls))
+    .map(([s,v])=>({sym:s,name:nm(s),cls:wl[s].cls,...v}))
+    .sort((a,b)=>a.cls.localeCompare(b.cls)||b.dp-a.dp);
 
-  document.getElementById('rotTable').innerHTML = `
-    <thead><tr>
-      <th>Sector</th><th>Symbol</th><th style="text-align:right">Change</th>
-      <th style="text-align:right">vs S&amp;P</th><th>Relative</th>
-    </tr></thead>
-    <tbody>${sectors.map(s => `<tr>
-      <td>${esc(s.name)}</td>
-      <td class="sym">${s.sym}</td>
-      <td class="num ${cls(s.dp)}">${pct(s.dp)}</td>
-      <td class="num ${cls(s.rel)}">${pct(s.rel)}</td>
-      <td><span class="pill ${s.rel > 0.15 ? 'o' : s.rel < -0.15 ? 'u' : 'n'}">${
-        s.rel > 0.15 ? 'outperforming' : s.rel < -0.15 ? 'lagging' : 'in line'
-      }</span></td>
-    </tr>`).join('')}</tbody>`;
-
-  // ---- macro table ----
-  const macro = Object.entries(latest.quotes)
-    .filter(([s]) => ['commodity','fx','rates'].includes(wl[s]?.cls))
-    .map(([s,q]) => ({sym:s, name:wl[s].name, cls:wl[s].cls, ...q}))
-    .sort((a,b) => a.cls.localeCompare(b.cls) || b.dp - a.dp);
-
-  const clsName = {commodity:'Commodity', fx:'Currency', rates:'Rates'};
-  document.getElementById('macroTable').innerHTML = `
-    <thead><tr>
-      <th>Asset</th><th>Proxy</th><th>Class</th>
-      <th style="text-align:right">Last</th><th style="text-align:right">Change</th>
-    </tr></thead>
-    <tbody>${macro.map(m => `<tr>
+  document.getElementById('macroTable').innerHTML=`
+    <thead><tr><th>Asset</th><th>Proxy</th><th>Class</th>
+      <th style="text-align:right">Last</th><th style="text-align:right">Change</th></tr></thead>
+    <tbody>${macro.map(m=>`<tr>
       <td>${esc(m.name)}</td>
       <td class="sym">${m.sym}</td>
-      <td class="desc">${clsName[m.cls]}</td>
+      <td><span class="chip"><i style="background:var(--c-${m.cls})"></i>${m.cls}</span></td>
       <td class="num">${fmt(m.c)}</td>
-      <td class="num ${cls(m.dp)}">${pct(m.dp)}</td>
-    </tr>`).join('')}</tbody>`;
+      <td class="num ${cl(m.dp)}">${pct(m.dp)}</td></tr>`).join('')}</tbody>`;
 
-  // ---- news ----
-  const news = meta.news || [];
-  document.getElementById('news').innerHTML = news.length
-    ? news.map(a => `<li>
-        <a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.headline)}</a>
-        <div class="meta">${esc(a.source)} · ${new Date(a.datetime * 1000).toISOString().slice(0,10)}</div>
-      </li>`).join('')
-    : '<li class="desc">No headlines in the last snapshot.</li>';
+  /* ---------- analyst note ---------- */
+  const body = (COMMENTARY||'').trim();
+  document.getElementById('commentary').innerHTML = body
+    ? `<div class="by">Analyst note</div>` + body.split(/\n\s*\n/).map(p=>`<p>${esc(p)}</p>`).join('')
+    : `<div class="by">Analyst note</div><p><em>Not written yet. Edit <code>commentary.md</code> in the repository and the next build will render it here.</em></p>`;
 
-  // ---- footer ----
   document.getElementById('foot').innerHTML =
-    `Data: Finnhub (quotes, headlines). Collected ${n} session${n===1?'':'s'}, ` +
-    `${Object.keys(latest.quotes).length} symbols. Not investment advice.`;
+    `Data: Finnhub (quotes, headlines). ${n} session${n===1?'':'s'} collected, ${Object.keys(q).length} symbols. Not investment advice.`;
 }
 
-// Prefer the live file (GitHub Pages); fall back to the build-time copy.
-fetch('history.json', {cache: 'no-store'})
-  .then(r => r.ok ? r.json() : Promise.reject())
+fetch('history.json',{cache:'no-store'})
+  .then(r=>r.ok?r.json():Promise.reject())
   .then(render)
-  .catch(() => render(INLINE || {meta:{}, snapshots:[]}));
+  .catch(()=>render(INLINE||{meta:{},snapshots:[]}));
 </script>
 </body>
 </html>

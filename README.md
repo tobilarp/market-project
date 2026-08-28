@@ -21,7 +21,7 @@ each asset against its own volatility is what makes them comparable.
 | Benchmarks | S&P 500, Nasdaq, UK and German equity proxies |
 | What moved today | Leading and lagging sectors, biggest commodity move, risk posture — with related headlines |
 | Sector rotation | Each US sector's move relative to the S&P, as a diverging bar chart |
-| Anomaly screen | Every tracked asset ranked by z-score, flagged at \|z\| ≥ 2 |
+| All tracked instruments | All 24 funds grouped by exposure, with anything unusual lifted to the top |
 | Commodities & FX | Oil, gold, gas, agriculture, major currencies, long Treasuries |
 | Analyst note | Hand-written interpretation — the only part of the page that isn't mechanical |
 
@@ -69,10 +69,17 @@ Two useful side effects:
 - **API keys never reach the browser.** They live in GitHub Actions secrets and are only
   ever used server-side.
 
-### ETF proxies
+### Everything tracked is an ETF
 
-Because Finnhub's free tier has no futures or FX, commodities and foreign markets are
-tracked through liquid ETFs:
+Worth stating plainly, because it is easy to misread the tables: **no row in this
+project is an index, a barrel of oil or a currency.** Every one is an exchange-traded
+fund — an instrument that trades like a share and tracks one of those things. `SPY` is
+not the S&P 500; it is a fund holding the index constituents. `XLK` is not "technology";
+it is the Technology Select Sector SPDR Fund.
+
+The tables label this as **Ticker** (what trades), **Tracks** (the exposure it gives)
+and **Exposure** (what kind). Free-tier data has no futures or FX, so the macro
+exposures are reached this way:
 
 | Exposure | Proxy | Exposure | Proxy |
 |---|---|---|---|

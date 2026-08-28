@@ -194,7 +194,7 @@
 
 <header>
   <h1>Daily Market Monitor</h1>
-  <p class="sub">A daily read on global equities, sectors, commodities and currencies — 24 instruments, collected every weekday, with unusual moves flagged against each asset's own history.</p>
+  <p class="sub">A daily read on global equities, sectors, commodities and currencies — tracked through 24 exchange-traded funds, collected every weekday, with unusual moves flagged against each fund's own history.</p>
   <p class="stamp" id="stamp">loading…</p>
 </header>
 
@@ -220,14 +220,14 @@
 </section>
 
 <section>
-  <h2>Anomaly screen</h2>
+  <h2>All tracked instruments</h2>
   <p class="note" id="anomNote"></p>
   <div class="scroll"><table id="anomTable"></table></div>
 </section>
 
 <section>
   <h2>Commodities &amp; currencies</h2>
-  <p class="note">Tracked through liquid ETF proxies — see methodology.</p>
+  <p class="note">The macro subset of the table above, pulled out for a closer look.</p>
   <div class="scroll"><table id="macroTable"></table></div>
 </section>
 
@@ -241,8 +241,12 @@
   <h2>How to read this</h2>
   <div class="explain">
     <div class="ex">
+      <h3>Everything here is an ETF</h3>
+      <p>Not one row is an index, a barrel of oil or a currency. Each is a fund that trades like a share and tracks one of those things. <code>SPY</code> isn't the S&amp;P 500 — it's a fund holding the 500 constituents. The <em>Tracks</em> column names the exposure; the <em>Ticker</em> is what actually trades.</p>
+    </div>
+    <div class="ex">
       <h3>Why "unusual" beats "big"</h3>
-      <p>Natural gas routinely swings 3% in a day; long-dated Treasuries doing the same would be a serious event. Comparing every asset against its own history is what makes those two comparable.</p>
+      <p>Natural gas routinely swings 3% in a day; long-dated Treasuries doing the same would be a serious event. Comparing every instrument against its own history is what makes those two comparable.</p>
     </div>
     <div class="ex">
       <h3>What a z-score is</h3>
@@ -503,26 +507,41 @@ function render(hist){
     return Math.abs(b.dp)-Math.abs(a.dp);
   });
 
-  document.getElementById('anomNote').textContent = n>MIN_OBS
-    ? `Scored against ${n-1} prior sessions, sorted by how far each move sits from that asset's own normal.`
-    : `Not enough history to score yet — showing today's moves by size, largest first.`;
+  // Every row is an ETF. Group by exposure type, biggest move first within each
+  // group — a market overview reads better grouped than ranked. Anything flagged
+  // as unusual is lifted to the top, since that is the exception worth seeing.
+  const ORDER = {index:0, sector:1, commodity:2, fx:3, rates:4};
+  const LABEL = {index:'Index', sector:'Sector', commodity:'Commodity', fx:'Currency', rates:'Rates'};
+  rows.sort((a,b)=>{
+    const fa=a.z!==null&&Math.abs(a.z)>=2, fb=b.z!==null&&Math.abs(b.z)>=2;
+    if(fa!==fb) return fa?-1:1;
+    const oa=ORDER[a.cls]??9, ob=ORDER[b.cls]??9;
+    return oa-ob || Math.abs(b.dp)-Math.abs(a.dp);
+  });
+
+  const flagged = rows.filter(r=>r.z!==null&&Math.abs(r.z)>=2).length;
+  document.getElementById('anomNote').innerHTML = n>MIN_OBS
+    ? `All ${rows.length} instruments, grouped by exposure. ${flagged
+        ? `<strong>${flagged}</strong> move${flagged===1?'':'s'} today sat far enough from that instrument's own normal to be flagged — those are lifted to the top.`
+        : `Nothing today moved far enough from its own normal to be flagged.`}`
+    : `All ${rows.length} instruments, grouped by exposure, biggest move first within each group. The unusual-move column stays empty until there is enough history to score against.`;
 
   document.getElementById('anomTable').innerHTML=`
-    <thead><tr><th>Symbol</th><th>Asset</th><th>Class</th>
-      <th style="text-align:right">Change</th><th style="text-align:right">Z-score</th><th>Status</th></tr></thead>
+    <thead><tr><th>Ticker</th><th>Tracks</th><th>Exposure</th>
+      <th style="text-align:right">Change</th><th style="text-align:right">Z-score</th><th>Unusual?</th></tr></thead>
     <tbody>${rows.map(r=>{
       let zc='<span class="desc">—</span>', st;
       if(r.z===null) st=`<span class="pill n">${r.obs}/${MIN_OBS} obs</span>`;
       else{
         const hot=Math.abs(r.z)>=2;
         zc=`<span class="${hot?(r.z>0?'up':'down'):''}">${r.z>=0?'+':''}${r.z.toFixed(2)}</span>`;
-        st=hot?`<span class="pill ${r.z>0?'hi':'lo'}"><i class="dot"></i>flagged</span>`
-              :`<span class="pill n">normal</span>`;
+        st=hot?`<span class="pill ${r.z>0?'hi':'lo'}"><i class="dot"></i>unusual</span>`
+              :`<span class="pill n">typical</span>`;
       }
       return `<tr>
         <td class="sym">${r.sym}</td>
         <td class="desc">${esc(r.name)}</td>
-        <td><span class="chip"><i style="background:var(--c-${r.cls||'index'})"></i>${esc(r.cls||'')}</span></td>
+        <td><span class="chip"><i style="background:var(--c-${r.cls||'index'})"></i>${esc(LABEL[r.cls]||r.cls||'')}</span></td>
         <td class="num ${cl(r.dp)}">${pct(r.dp)}</td>
         <td class="num">${zc}</td>
         <td>${st}</td></tr>`;
@@ -534,12 +553,12 @@ function render(hist){
     .sort((a,b)=>a.cls.localeCompare(b.cls)||b.dp-a.dp);
 
   document.getElementById('macroTable').innerHTML=`
-    <thead><tr><th>Asset</th><th>Proxy</th><th>Class</th>
-      <th style="text-align:right">Last</th><th style="text-align:right">Change</th></tr></thead>
+    <thead><tr><th>Tracks</th><th>Ticker</th><th>Exposure</th>
+      <th style="text-align:right">Fund price</th><th style="text-align:right">Change</th></tr></thead>
     <tbody>${macro.map(m=>`<tr>
       <td>${esc(m.name)}</td>
       <td class="sym">${m.sym}</td>
-      <td><span class="chip"><i style="background:var(--c-${m.cls})"></i>${m.cls}</span></td>
+      <td><span class="chip"><i style="background:var(--c-${m.cls})"></i>${LABEL[m.cls]||m.cls}</span></td>
       <td class="num">${fmt(m.c)}</td>
       <td class="num ${cl(m.dp)}">${pct(m.dp)}</td></tr>`).join('')}</tbody>`;
 

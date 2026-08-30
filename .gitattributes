@@ -1,0 +1,4 @@
+# Keep line endings identical everywhere. GitHub Desktop checks out CRLF on
+# Windows while the Actions bot commits LF, which made every history.json and
+# index.html diff look like a full-file rewrite.
+* text=auto eol=lf

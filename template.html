@@ -349,7 +349,9 @@ function matchNews(sym, news, limit=3){
 
 function seriesOf(hist){
   const out={};
-  for(const s of hist.snapshots)
+  // Only settled closes form the baseline. A snapshot taken while the market
+  // was still open is a price, not a session, and would skew the z-scores.
+  for(const s of hist.snapshots.filter(s=>s.final!==false))
     for(const [sym,q] of Object.entries(s.quotes))
       (out[sym]??=[]).push({date:s.date, dp:q.dp, c:q.c});
   return out;

@@ -15,7 +15,7 @@ import os
 import sys
 import time
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 FINNHUB_KEY = os.environ.get("FINNHUB_KEY")
@@ -85,6 +85,7 @@ def get_quote(symbol):
         "dp": data["dp"],  # percent change
         "h": data["h"],    # day high
         "l": data["l"],    # day low
+        "t": data.get("t", 0),  # unix time of the last trade
     }
 
 
@@ -106,6 +107,39 @@ def get_news(limit=40):
     return out
 
 
+# The whole US trading day - premarket through the extended close - sits
+# inside a single calendar date once it is shifted back five hours from UTC.
+# Dating a snapshot from the quote's own timestamp rather than from the wall
+# clock means a job that fires late (GitHub's scheduler is routinely hours
+# behind) still files its data under the session it actually belongs to.
+SESSION_SHIFT = timedelta(hours=5)
+REFERENCE = "SPY"                      # most liquid name, so the freshest timestamp
+STALE_AFTER = timedelta(minutes=30)
+
+
+def _reference_time(quotes):
+    q = quotes.get(REFERENCE) or next(iter(quotes.values()), None)
+    ts = (q or {}).get("t")
+    return datetime.fromtimestamp(ts, timezone.utc) if ts else None
+
+
+def session_date(quotes, now):
+    """The trading session these quotes belong to, as YYYY-MM-DD."""
+    when = _reference_time(quotes) or now
+    return (when - SESSION_SHIFT).strftime("%Y-%m-%d")
+
+
+def is_final(quotes, now):
+    """True if the session had already closed when the snapshot was taken.
+
+    While trading is open the reference quote updates continuously, so it is
+    seconds old. Once the session ends it freezes and begins to age - that
+    gap is what distinguishes a close from a mid-session price.
+    """
+    when = _reference_time(quotes)
+    return bool(when) and now - when > STALE_AFTER
+
+
 def load_history():
     if HISTORY.exists():
         try:
@@ -117,13 +151,9 @@ def load_history():
 
 def main():
     hist = load_history()
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
-    # Don't double-collect the same day; overwrite instead.
-    hist["snapshots"] = [s for s in hist["snapshots"] if s["date"] != today]
 
     quotes = {}
-    print(f"Collecting {len(WATCHLIST)} symbols for {today}...")
+    print(f"Collecting {len(WATCHLIST)} symbols...")
     for symbol in WATCHLIST:
         q = get_quote(symbol)
         if q:
@@ -133,9 +163,26 @@ def main():
             print(f"  {symbol:5} -- no data")
         time.sleep(1.1)  # stay under 60 calls/min
 
+    if not quotes:
+        sys.exit("no quotes returned - leaving history.json untouched")
+
+    now = datetime.now(timezone.utc)
+    session = session_date(quotes, now)
+    final = is_final(quotes, now)
+    print(f"\nSession {session} - "
+          f"{'closing prices' if final else 'MID-SESSION, provisional'}")
+
+    # One snapshot per session. A provisional mid-session reading never
+    # overwrites a settled close; a close always replaces a provisional one.
+    existing = next((s for s in hist["snapshots"] if s["date"] == session), None)
+    if existing and existing.get("final") and not final:
+        sys.exit("a closing snapshot for this session is already on file")
+    hist["snapshots"] = [s for s in hist["snapshots"] if s["date"] != session]
+
     hist["snapshots"].append({
-        "date": today,
-        "collected_at": datetime.now(timezone.utc).isoformat(),
+        "date": session,
+        "final": final,
+        "collected_at": now.isoformat(),
         "quotes": quotes,
     })
     hist["snapshots"].sort(key=lambda s: s["date"])

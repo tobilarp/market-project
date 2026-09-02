@@ -567,8 +567,8 @@ function render(hist){
   /* ---------- analyst note ---------- */
   const body = (COMMENTARY||'').trim();
   document.getElementById('commentary').innerHTML = body
-    ? `<div class="by">Analyst note</div>` + body.split(/\n\s*\n/).map(p=>`<p>${esc(p)}</p>`).join('')
-    : `<div class="by">Analyst note</div><p><em>Not written yet. Edit <code>commentary.md</code> in the repository and the next build will render it here.</em></p>`;
+    ? body.split(/\n\s*\n/).map(p=>`<p>${esc(p)}</p>`).join('')
+    : `<p><em>Not written yet. Edit <code>commentary.md</code> in the repository and the next build will render it here.</em></p>`;
 
   document.getElementById('foot').innerHTML =
     `Data: Finnhub (quotes, headlines). ${n} session${n===1?'':'s'} collected, ${Object.keys(q).length} symbols. Not investment advice.`;

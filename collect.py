@@ -166,6 +166,13 @@ def main():
     if not quotes:
         sys.exit("no quotes returned - leaving history.json untouched")
 
+    # Which symbols were asked for but came back empty. Recorded in the
+    # snapshot so the page can say "no data" for that row instead of the
+    # reader assuming a missing instrument simply did not move.
+    missing = [s for s in WATCHLIST if s not in quotes]
+    if missing:
+        print(f"  no data for: {', '.join(missing)}")
+
     now = datetime.now(timezone.utc)
     session = session_date(quotes, now)
     final = is_final(quotes, now)
@@ -175,14 +182,31 @@ def main():
     # One snapshot per session. A provisional mid-session reading never
     # overwrites a settled close; a close always replaces a provisional one.
     existing = next((s for s in hist["snapshots"] if s["date"] == session), None)
-    if existing and existing.get("final") and not final:
+    settled = bool(existing and existing.get("final"))
+    if settled and not final:
         sys.exit("a closing snapshot for this session is already on file")
+    if settled:
+        # A settled session can legitimately be collected twice. On a US market
+        # holiday the API still returns the previous session's close, so the run
+        # re-dates onto a session already on file. Rewriting it is only safe if
+        # the new reading is at least as complete - otherwise one symbol failing
+        # today would erase it from a session that had it, permanently.
+        if len(quotes) < len(existing.get("quotes", {})):
+            sys.exit(
+                f"refusing to overwrite the {session} snapshot "
+                f"({len(existing['quotes'])} symbols) with a smaller one "
+                f"({len(quotes)} symbols)"
+            )
+    # A session's collection time is when it was first captured, not when a
+    # later run happened to re-read the same frozen close.
+    collected_at = (existing or {}).get("collected_at") if settled else None
     hist["snapshots"] = [s for s in hist["snapshots"] if s["date"] != session]
 
     hist["snapshots"].append({
         "date": session,
         "final": final,
-        "collected_at": now.isoformat(),
+        "collected_at": collected_at or now.isoformat(),
+        "missing": missing,
         "quotes": quotes,
     })
     hist["snapshots"].sort(key=lambda s: s["date"])

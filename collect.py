@@ -31,6 +31,7 @@ WATCHLIST = {
     "SPY": {"name": "S&P 500", "cls": "index"},
     "QQQ": {"name": "Nasdaq 100", "cls": "index"},
     "IWM": {"name": "Russell 2000", "cls": "index"},
+    "DIA": {"name": "Dow Jones 30", "cls": "index"},
     # International indices
     "EWU": {"name": "UK / FTSE", "cls": "index"},
     "EWG": {"name": "Germany / DAX", "cls": "index"},
@@ -48,7 +49,11 @@ WATCHLIST = {
     "FXE": {"name": "Euro", "cls": "fx"},
     "FXB": {"name": "British Pound", "cls": "fx"},
     "FXY": {"name": "Japanese Yen", "cls": "fx"},
-    # Rate-sensitive
+    # Rate-sensitive. Two points on the curve, because they are not
+    # interchangeable: IEF is the 7-10 year belly, which is what people mean
+    # by "the 10-year", while TLT is the long end and moves further on the
+    # same change in yields.
+    "IEF": {"name": "7-10Y Treasuries", "cls": "rates"},
     "TLT": {"name": "20Y+ Treasuries", "cls": "rates"},
     # Sectors - used for rotation analysis
     "XLE": {"name": "Energy", "cls": "sector"},

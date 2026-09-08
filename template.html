@@ -498,16 +498,20 @@ function render(hist){
     </div>`;
 
   /* ---------- anomaly table ---------- */
+  // A symbol that failed to collect still has history, so its last entry is an
+  // earlier session's move. Presenting that under today's date would be wrong,
+  // so the row reports no data instead - and it is not scored, because there is
+  // no move today to score. Every observation it does have counts as baseline.
   const rows=Object.entries(ser).map(([sym,h])=>{
-    const today=h[h.length-1], prior=h.slice(0,-1).map(d=>d.dp);
+    const last=h[h.length-1];
+    const stale=last.date!==latest.date;
+    const prior=(stale?h:h.slice(0,-1)).map(d=>d.dp);
     let z=null;
-    if(prior.length>=MIN_OBS){const s=sd(prior); if(s>0) z=(today.dp-mean(prior))/s;}
-    return {sym,name:nm(sym),cls:wl[sym]?.cls,dp:today.dp,z,obs:prior.length};
-  }).sort((a,b)=>{
-    if(a.z!==null&&b.z!==null) return Math.abs(b.z)-Math.abs(a.z);
-    if(a.z!==null) return -1; if(b.z!==null) return 1;
-    return Math.abs(b.dp)-Math.abs(a.dp);
+    if(!stale&&prior.length>=MIN_OBS){const s=sd(prior); if(s>0) z=(last.dp-mean(prior))/s;}
+    return {sym,name:nm(sym),cls:wl[sym]?.cls,dp:stale?null:last.dp,z,
+            obs:prior.length,stale,since:last.date};
   });
+  const mag=r=>r.dp===null?-1:Math.abs(r.dp);
 
   // Every row is an ETF. Group by exposure type, biggest move first within each
   // group — a market overview reads better grouped than ranked. Anything flagged
@@ -518,22 +522,29 @@ function render(hist){
     const fa=a.z!==null&&Math.abs(a.z)>=2, fb=b.z!==null&&Math.abs(b.z)>=2;
     if(fa!==fb) return fa?-1:1;
     const oa=ORDER[a.cls]??9, ob=ORDER[b.cls]??9;
-    return oa-ob || Math.abs(b.dp)-Math.abs(a.dp);
+    return oa-ob || mag(b)-mag(a);
   });
 
   const flagged = rows.filter(r=>r.z!==null&&Math.abs(r.z)>=2).length;
-  document.getElementById('anomNote').innerHTML = n>MIN_OBS
+  const gaps = rows.filter(r=>r.stale);
+  const gapNote = gaps.length
+    ? ` <strong>${gaps.length}</strong> (${gaps.map(r=>r.sym).join(', ')}) returned no data
+        for this session, so ${gaps.length===1?'it is':'they are'} shown as no data rather than
+        carrying an earlier move forward.`
+    : '';
+  document.getElementById('anomNote').innerHTML = (n>MIN_OBS
     ? `All ${rows.length} instruments, grouped by exposure. ${flagged
         ? `<strong>${flagged}</strong> move${flagged===1?'':'s'} today sat far enough from that instrument's own normal to be flagged — those are lifted to the top.`
         : `Nothing today moved far enough from its own normal to be flagged.`}`
-    : `All ${rows.length} instruments, grouped by exposure, biggest move first within each group. The unusual-move column stays empty until there is enough history to score against.`;
+    : `All ${rows.length} instruments, grouped by exposure, biggest move first within each group. The unusual-move column stays empty until there is enough history to score against.`) + gapNote;
 
   document.getElementById('anomTable').innerHTML=`
     <thead><tr><th>Ticker</th><th>Tracks</th><th>Exposure</th>
       <th style="text-align:right">Change</th><th style="text-align:right">Z-score</th><th>Unusual?</th></tr></thead>
     <tbody>${rows.map(r=>{
       let zc='<span class="desc">—</span>', st;
-      if(r.z===null) st=`<span class="pill n">${r.obs}/${MIN_OBS} obs</span>`;
+      if(r.stale) st=`<span class="pill n" title="Last reading ${r.since}">no data</span>`;
+      else if(r.z===null) st=`<span class="pill n">${r.obs}/${MIN_OBS} obs</span>`;
       else{
         const hot=Math.abs(r.z)>=2;
         zc=`<span class="${hot?(r.z>0?'up':'down'):''}">${r.z>=0?'+':''}${r.z.toFixed(2)}</span>`;
@@ -544,7 +555,7 @@ function render(hist){
         <td class="sym">${r.sym}</td>
         <td class="desc">${esc(r.name)}</td>
         <td><span class="chip"><i style="background:var(--c-${r.cls||'index'})"></i>${esc(LABEL[r.cls]||r.cls||'')}</span></td>
-        <td class="num ${cl(r.dp)}">${pct(r.dp)}</td>
+        <td class="num ${r.stale?'':cl(r.dp)}">${r.stale?'<span class="desc">—</span>':pct(r.dp)}</td>
         <td class="num">${zc}</td>
         <td>${st}</td></tr>`;
     }).join('')}</tbody>`;

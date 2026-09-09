@@ -1,4 +1,6 @@
-1 September 2026 — oil shock, and everything that followed
+<!-- Newest entry at the top. Each entry starts with a '## ' heading. -->
+
+## 1 September 2026 — oil shock, and everything that followed
 
 Markets ran red today. The S&P 500 fell 0.7% and the Nasdaq 100
 1.3% — the S&P's third straight down day. The trigger was another round

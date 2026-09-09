@@ -165,6 +165,19 @@
   .note-card p{margin:0 0 11px; font-size:14px; line-height:1.62}
   .note-card p:last-child{margin-bottom:0}
   .note-card em{color:var(--ink-2)}
+  .note-card .ent-h{margin:0 0 11px; font-size:14px; font-weight:680;
+                    color:var(--ink); letter-spacing:-.005em}
+  .note-card .entry + .entry{margin-top:19px; padding-top:19px;
+                             border-top:1px solid var(--ring)}
+
+  /* ---------- trend sparkline ---------- */
+  .spark{display:block; width:66px; height:20px; overflow:visible}
+  .spark path{fill:none; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round}
+  .spark .base{stroke:var(--axis); stroke-width:1; stroke-dasharray:2 2}
+  .spark .up{stroke:var(--up); color:var(--up)}
+  .spark .down{stroke:var(--down); color:var(--down)}
+  .spark .flat{stroke:var(--axis); color:var(--axis)}
+  .spark circle{r:1.9; fill:currentColor}
 
   /* ---------- explainer ---------- */
   .explain{display:grid; gap:13px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
@@ -257,6 +270,10 @@
       <p>Money moving between parts of the market rather than in or out of it. Technology leading while utilities lag is a different market from both falling together, even if the index closes flat.</p>
     </div>
     <div class="ex">
+      <h3>Why one day misleads</h3>
+      <p>A run of small daily moves in the same direction adds up to something a single day never shows. Crude read roughly flat for three sessions at the start of September while quietly sitting 3.6% above where the week began. The cumulative columns exist because of that — and they compound the prices rather than summing the percentages, since +5% then −5% leaves you down, not level.</p>
+    </div>
+    <div class="ex">
       <h3>What a flag is worth</h3>
       <p>It says "look here", nothing more. An earnings date, an index rebalance and a genuine dislocation all leave the same statistical footprint. Separating them is a judgement, which is what the analyst note is for.</p>
     </div>
@@ -297,7 +314,7 @@
 
 <script>
 const INLINE = /*__HISTORY__*/null;
-const COMMENTARY = /*__COMMENTARY__*/"";
+const NOTES = /*__COMMENTARY__*/[];
 const MIN_OBS = 10;
 
 const pct = n => (n>=0?'+':'') + n.toFixed(2) + '%';
@@ -347,6 +364,24 @@ function matchNews(sym, news, limit=3){
     const t=(a.headline+' '+(a.summary||'')).toLowerCase();
     return keys.some(k=>t.includes(k));
   }).slice(0,limit);
+}
+
+// A 66x20 line of this instrument's cumulative % change since collection
+// began, drawn against a dashed zero line so up and down are readable at a
+// glance. Scaled to its own range - these are trend shapes, not a chart you
+// read values off.
+function spark(path){
+  const pts=(path||[]).filter(v=>v!==null&&isFinite(v));
+  if(pts.length<2) return '<span class="desc">—</span>';
+  const W=66,H=20,lo=Math.min(0,...pts),hi=Math.max(0,...pts),span=(hi-lo)||1;
+  const x=i=>i*(W/(pts.length-1)), y=v=>H-((v-lo)/span)*H;
+  const d=pts.map((v,i)=>`${i?'L':'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' ');
+  const end=pts[pts.length-1], k=end>0.05?'up':end<-0.05?'down':'flat';
+  return `<svg class="spark" viewBox="-1 -1 ${W+2} ${H+2}" aria-hidden="true">
+    <path class="base" d="M0 ${y(0).toFixed(1)} L${W} ${y(0).toFixed(1)}"/>
+    <path class="${k}" d="${d}"/>
+    <circle class="${k}" cx="${W}" cy="${y(end).toFixed(1)}"/>
+  </svg>`;
 }
 
 function seriesOf(hist){
@@ -504,14 +539,22 @@ function render(hist){
   // earlier session's move. Presenting that under today's date would be wrong,
   // so the row reports no data instead - and it is not scored, because there is
   // no move today to score. Every observation it does have counts as baseline.
+  // Multi-session change is computed from the closing PRICES, never by adding
+  // the daily percentages together: +5% then -5% is -0.25%, not 0. back(k)
+  // compares the latest close with the close k sessions earlier, and returns
+  // null when this symbol does not have that much history yet.
+  const chg=(from,to)=> from>0 ? (to/from-1)*100 : null;
   const rows=Object.entries(ser).map(([sym,h])=>{
     const last=h[h.length-1];
     const stale=last.date!==latest.date;
     const prior=(stale?h:h.slice(0,-1)).map(d=>d.dp);
     let z=null;
     if(!stale&&prior.length>=MIN_OBS){const s=sd(prior); if(s>0) z=(last.dp-mean(prior))/s;}
+    const back=k=> (!stale && h.length>k) ? chg(h[h.length-1-k].c, last.c) : null;
     return {sym,name:nm(sym),cls:wl[sym]?.cls,dp:stale?null:last.dp,z,
-            obs:prior.length,stale,since:last.date};
+            obs:prior.length,stale,since:last.date,
+            w5:back(5), all:h.length>1?back(h.length-1):null,
+            path:h.map(d=>chg(h[0].c,d.c)), sessions:h.length};
   });
   const mag=r=>r.dp===null?-1:Math.abs(r.dp);
 
@@ -538,11 +581,21 @@ function render(hist){
     ? `All ${rows.length} instruments, grouped by exposure. ${flagged
         ? `<strong>${flagged}</strong> move${flagged===1?'':'s'} today sat far enough from that instrument's own normal to be flagged — those are lifted to the top.`
         : `Nothing today moved far enough from its own normal to be flagged.`}`
-    : `All ${rows.length} instruments, grouped by exposure, biggest move first within each group. The unusual-move column stays empty until there is enough history to score against.`) + gapNote;
+    : `All ${rows.length} instruments, grouped by exposure, biggest move first within each group. The unusual-move column stays empty until there is enough history to score against.`)
+    + ` <em>Day</em> is the latest session; <em>5 sessions</em> and <em>Since start</em> are cumulative, worked out from the closing prices rather than by adding the daily percentages up.`
+    + gapNote;
+
+  // A cell for a multi-session move: an em-dash when this symbol has not been
+  // collected for long enough to have one, rather than a misleading zero.
+  const cum = v => v===null ? '<span class="desc">—</span>'
+                            : `<span class="${cl(v)}">${pct(v)}</span>`;
 
   document.getElementById('anomTable').innerHTML=`
-    <thead><tr><th>Ticker</th><th>Tracks</th><th>Exposure</th>
-      <th style="text-align:right">Change</th><th style="text-align:right">Z-score</th><th>Unusual?</th></tr></thead>
+    <thead><tr><th>Ticker</th><th>Tracks</th><th>Exposure</th><th>Trend</th>
+      <th style="text-align:right">Day</th>
+      <th style="text-align:right">5 sessions</th>
+      <th style="text-align:right">Since start</th>
+      <th style="text-align:right">Z-score</th><th>Unusual?</th></tr></thead>
     <tbody>${rows.map(r=>{
       let zc='<span class="desc">—</span>', st;
       if(r.stale) st=`<span class="pill n" title="Last reading ${r.since}">no data</span>`;
@@ -557,7 +610,10 @@ function render(hist){
         <td class="sym">${r.sym}</td>
         <td class="desc">${esc(r.name)}</td>
         <td><span class="chip"><i style="background:var(--c-${r.cls||'index'})"></i>${esc(LABEL[r.cls]||r.cls||'')}</span></td>
+        <td title="${r.sessions} session${r.sessions===1?'':'s'} on file">${spark(r.path)}</td>
         <td class="num ${r.stale?'':cl(r.dp)}">${r.stale?'<span class="desc">—</span>':pct(r.dp)}</td>
+        <td class="num">${cum(r.w5)}</td>
+        <td class="num">${cum(r.all)}</td>
         <td class="num">${zc}</td>
         <td>${st}</td></tr>`;
     }).join('')}</tbody>`;
@@ -578,10 +634,19 @@ function render(hist){
       <td class="num ${cl(m.dp)}">${pct(m.dp)}</td></tr>`).join('')}</tbody>`;
 
   /* ---------- analyst note ---------- */
-  const body = (COMMENTARY||'').trim();
-  document.getElementById('commentary').innerHTML = body
-    ? body.split(/\n\s*\n/).map(p=>`<p>${esc(p)}</p>`).join('')
-    : `<p><em>Not written yet. Edit <code>commentary.md</code> in the repository and the next build will render it here.</em></p>`;
+  // commentary.md is written newest-entry-first and build.py hands it over
+  // already split into {heading, body}. Each paragraph is escaped before
+  // *emphasis* becomes markup, so nothing written in the note can put HTML
+  // into the page.
+  const notes = (Array.isArray(NOTES) ? NOTES : []).filter(e=>e && (e.heading||e.body));
+  const para = t => esc(t.replace(/\s*\n\s*/g,' ').trim())
+                      .replace(/\*([^*\n]+)\*/g,'<em>$1</em>');
+  document.getElementById('commentary').innerHTML = notes.length
+    ? notes.map(e=>`<article class="entry">
+        ${e.heading?`<h3 class="ent-h">${esc(e.heading)}</h3>`:''}
+        ${(e.body||'').split(/\n\s*\n/).filter(p=>p.trim()).map(p=>`<p>${para(p)}</p>`).join('')}
+      </article>`).join('')
+    : `<p><em>Not written yet. Add an entry to <code>commentary.md</code> in the repository and the next build will render it here.</em></p>`;
 
   document.getElementById('foot').innerHTML =
     `Data: Finnhub (quotes, headlines). ${n} session${n===1?'':'s'} collected, ${Object.keys(q).length} symbols. Not investment advice.`;

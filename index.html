@@ -192,6 +192,44 @@
   code{font-family:var(--mono); font-size:12.5px; background:var(--plane);
        padding:1px 5px; border-radius:4px; border:1px solid var(--grid)}
 
+  /* ---------- clickable rows ---------- */
+  tr.go{cursor:pointer}
+  a.symlink{color:inherit; text-decoration:none; border-bottom:1px dotted var(--axis)}
+  tr.go:hover a.symlink{border-bottom-color:currentColor}
+  .from{display:block; font-size:10.5px; color:var(--muted); font-family:var(--sans); line-height:1.2}
+
+  /* ---------- instrument detail view ---------- */
+  .back{display:inline-flex; align-items:center; gap:6px; font-size:13.5px; color:var(--ink-2);
+        text-decoration:none; margin:6px 0 20px; font-weight:560}
+  .back:hover{color:var(--ink)}
+  .dhead{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; margin-bottom:4px}
+  .dhead .dsym{font-family:var(--mono); font-size:25px; font-weight:680; letter-spacing:-.02em}
+  .dhead .dname{font-size:19px; font-weight:600; color:var(--ink-2)}
+  .dstats{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); margin:20px 0 30px}
+  .dstats .tile::before{background:var(--dcol,var(--c-index))}
+  .dstats .val{font-size:22px}
+  .dstats .sub2{font-size:12px; color:var(--muted); margin-top:2px}
+  .dchart{position:relative; padding:16px 12px 10px}
+  .dchart svg{display:block; overflow:visible}
+  .dchart text{font-family:var(--mono); font-size:11px; fill:var(--muted)}
+  .dchart .grid{stroke:var(--grid); stroke-width:1}
+  .dchart .startln{stroke:var(--axis); stroke-width:1; stroke-dasharray:4 3}
+  .dchart .ln{fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+  .dchart .ln.up{stroke:var(--up)} .dchart .ln.down{stroke:var(--down)} .dchart .ln.flat{stroke:var(--ink-2)}
+  .dchart .flag{stroke:var(--surface); stroke-width:2}
+  .dchart .flag.hi{fill:var(--pos)} .dchart .flag.lo{fill:var(--crit)}
+  .dchart .xh{stroke:var(--axis); stroke-width:1}
+  .dchart .dot{stroke:var(--surface); stroke-width:2}
+  .dchart .dot.up{fill:var(--up)} .dchart .dot.down{fill:var(--down)} .dchart .dot.flat{fill:var(--ink-2)}
+  .tip{position:absolute; pointer-events:none; background:var(--raised); border:1px solid var(--ring);
+       border-radius:8px; padding:7px 10px; font-size:12px; line-height:1.45; white-space:nowrap;
+       box-shadow:0 4px 16px rgba(0,0,0,.13); z-index:2}
+  .tip b{font-weight:640} .tip .k{color:var(--muted)} .tip .m{font-family:var(--mono)}
+  .dkey{display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--ink-2); padding:4px 10px 0}
+  .dkey span{display:flex; align-items:center; gap:6px}
+  .dkey .dash{width:16px; border-top:1px dashed var(--axis)}
+  .dkey .fd{width:9px; height:9px; border-radius:50%}
+
   footer{margin-top:50px; padding-top:20px; border-top:1px solid var(--grid);
          color:var(--muted); font-size:12.5px}
 
@@ -207,10 +245,11 @@
 
 <header>
   <h1>Daily Market Monitor</h1>
-  <p class="sub">A daily read on global equities, sectors, commodities and currencies — tracked through 24 exchange-traded funds, collected every weekday, with unusual moves flagged against each fund's own history.</p>
+  <p class="sub">A daily read on global equities, sectors, commodities and currencies — tracked through <span id="nfunds">26</span> exchange-traded funds, collected every weekday, with unusual moves flagged against each fund's own history.</p>
   <p class="stamp" id="stamp">loading…</p>
 </header>
 
+<main id="overview">
 <div id="hero"></div>
 <div id="banner"></div>
 
@@ -309,6 +348,10 @@
   </div>
 </section>
 
+</main>
+
+<div id="detail" hidden></div>
+
 <footer id="foot"></footer>
 </div>
 
@@ -322,6 +365,12 @@ const pp  = n => Math.abs(n).toFixed(2) + (Math.abs(n)===1?' point':' points');
 const cl  = n => n>0.001?'up':n<-0.001?'down':'flat';
 const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt = n => n.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const dshort=iso=>{const [,m,d]=String(iso).split('-').map(Number); return `${d} ${MON[m-1]}`;};
+const dlong=iso=>`${dshort(iso)} ${String(iso).slice(0,4)}`;
+const chgPct=(from,to)=> from>0 ? (to/from-1)*100 : null;
+let STATE=null;
 
 const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
 const sd=a=>{if(a.length<2)return 0;const m=mean(a);return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2,0)/(a.length-1));};
@@ -543,7 +592,9 @@ function render(hist){
   // the daily percentages together: +5% then -5% is -0.25%, not 0. back(k)
   // compares the latest close with the close k sessions earlier, and returns
   // null when this symbol does not have that much history yet.
-  const chg=(from,to)=> from>0 ? (to/from-1)*100 : null;
+  const chg=chgPct;
+  const firstDate=snaps.filter(s=>s.final!==false)[0]?.date || latest.date;
+  const nf=document.getElementById('nfunds'); if(nf) nf.textContent=Object.keys(wl).length||Object.keys(q).length;
   const rows=Object.entries(ser).map(([sym,h])=>{
     const last=h[h.length-1];
     const stale=last.date!==latest.date;
@@ -552,7 +603,7 @@ function render(hist){
     if(!stale&&prior.length>=MIN_OBS){const s=sd(prior); if(s>0) z=(last.dp-mean(prior))/s;}
     const back=k=> (!stale && h.length>k) ? chg(h[h.length-1-k].c, last.c) : null;
     return {sym,name:nm(sym),cls:wl[sym]?.cls,dp:stale?null:last.dp,z,
-            obs:prior.length,stale,since:last.date,
+            obs:prior.length,stale,since:last.date,start:h[0].date,
             w5:back(5), all:h.length>1?back(h.length-1):null,
             path:h.map(d=>chg(h[0].c,d.c)), sessions:h.length};
   });
@@ -582,7 +633,8 @@ function render(hist){
         ? `<strong>${flagged}</strong> move${flagged===1?'':'s'} today sat far enough from that instrument's own normal to be flagged — those are lifted to the top.`
         : `Nothing today moved far enough from its own normal to be flagged.`}`
     : `All ${rows.length} instruments, grouped by exposure, biggest move first within each group. The unusual-move column stays empty until there is enough history to score against.`)
-    + ` <em>Day</em> is the latest session; <em>5 sessions</em> and <em>Since start</em> are cumulative, worked out from the closing prices rather than by adding the daily percentages up.`
+    + ` <em>Day</em> is the latest session; <em>5 sessions</em> and <em>Since ${dshort(firstDate)}</em> are cumulative, worked out from the closing prices rather than by adding the daily percentages up. ${dshort(firstDate)} is the first day this dashboard collected; a fund added later counts from its own first day, shown under its figure.`
+    + ` <strong>Click any row</strong> to open that fund's price chart and every daily close.`
     + gapNote;
 
   // A cell for a multi-session move: an em-dash when this symbol has not been
@@ -594,7 +646,7 @@ function render(hist){
     <thead><tr><th>Ticker</th><th>Tracks</th><th>Exposure</th><th>Trend</th>
       <th style="text-align:right">Day</th>
       <th style="text-align:right">5 sessions</th>
-      <th style="text-align:right">Since start</th>
+      <th style="text-align:right">Since ${dshort(firstDate)}</th>
       <th style="text-align:right">Z-score</th><th>Unusual?</th></tr></thead>
     <tbody>${rows.map(r=>{
       let zc='<span class="desc">—</span>', st;
@@ -606,14 +658,14 @@ function render(hist){
         st=hot?`<span class="pill ${r.z>0?'hi':'lo'}"><i class="dot"></i>unusual</span>`
               :`<span class="pill n">typical</span>`;
       }
-      return `<tr>
-        <td class="sym">${r.sym}</td>
+      return `<tr class="go" data-sym="${r.sym}">
+        <td class="sym"><a class="symlink" href="#/${r.sym}">${r.sym}</a></td>
         <td class="desc">${esc(r.name)}</td>
         <td><span class="chip"><i style="background:var(--c-${r.cls||'index'})"></i>${esc(LABEL[r.cls]||r.cls||'')}</span></td>
         <td title="${r.sessions} session${r.sessions===1?'':'s'} on file">${spark(r.path)}</td>
         <td class="num ${r.stale?'':cl(r.dp)}">${r.stale?'<span class="desc">—</span>':pct(r.dp)}</td>
         <td class="num">${cum(r.w5)}</td>
-        <td class="num">${cum(r.all)}</td>
+        <td class="num">${cum(r.all)}${r.start!==firstDate&&r.all!==null?`<span class="from">from ${dshort(r.start)}</span>`:''}</td>
         <td class="num">${zc}</td>
         <td>${st}</td></tr>`;
     }).join('')}</tbody>`;
@@ -626,9 +678,9 @@ function render(hist){
   document.getElementById('macroTable').innerHTML=`
     <thead><tr><th>Tracks</th><th>Ticker</th><th>Exposure</th>
       <th style="text-align:right">Fund price</th><th style="text-align:right">Change</th></tr></thead>
-    <tbody>${macro.map(m=>`<tr>
+    <tbody>${macro.map(m=>`<tr class="go" data-sym="${m.sym}">
       <td>${esc(m.name)}</td>
-      <td class="sym">${m.sym}</td>
+      <td class="sym"><a class="symlink" href="#/${m.sym}">${m.sym}</a></td>
       <td><span class="chip"><i style="background:var(--c-${m.cls})"></i>${LABEL[m.cls]||m.cls}</span></td>
       <td class="num">${fmt(m.c)}</td>
       <td class="num ${cl(m.dp)}">${pct(m.dp)}</td></tr>`).join('')}</tbody>`;
@@ -650,6 +702,161 @@ function render(hist){
 
   document.getElementById('foot').innerHTML =
     `Data: Finnhub (quotes, headlines). ${n} session${n===1?'':'s'} collected, ${Object.keys(q).length} symbols. Not investment advice.`;
+
+  STATE={ser, wl, latest, firstDate, LABEL};
+  for(const id of ['anomTable','macroTable'])
+    document.getElementById(id).addEventListener('click',e=>{
+      const tr=e.target.closest('tr.go'); if(!tr) return;
+      if(e.target.closest('a')) { STATE.returnTo=id; return; }
+      STATE.returnTo=id; location.hash='#/'+tr.dataset.sym;
+    });
+  route();
+}
+
+/* ---------- instrument detail view ---------- */
+// One fund's own page: every settled close it has, drawn as a line against
+// its first close, plus the same numbers as a table. Reached by #/TICKER, so
+// the browser back button works and a view can be linked to directly.
+function route(){
+  if(!STATE) return;
+  const m=location.hash.match(/^#\/([A-Za-z]{1,6})$/);
+  const sym=m && STATE.ser[m[1].toUpperCase()] ? m[1].toUpperCase() : null;
+  const ov=document.getElementById('overview'), det=document.getElementById('detail');
+  ov.hidden=!!sym; det.hidden=!sym;
+  if(sym){
+    det.innerHTML=detailHTML(sym);
+    drawChart(sym);
+    document.title=`${sym} · Daily Market Monitor`;
+    window.scrollTo(0,0);
+  } else {
+    det.innerHTML='';
+    document.title='Daily Market Monitor';
+    if(STATE.returnTo){ document.getElementById(STATE.returnTo)?.closest('section')?.scrollIntoView(); STATE.returnTo=null; }
+  }
+}
+window.addEventListener('hashchange',route);
+let _rz; window.addEventListener('resize',()=>{clearTimeout(_rz); _rz=setTimeout(()=>{
+  const m=location.hash.match(/^#\/([A-Za-z]{1,6})$/); if(m&&STATE?.ser[m[1].toUpperCase()]) drawChart(m[1].toUpperCase());
+},120);});
+
+function daysOf(sym){
+  const h=STATE.ser[sym], first=h[0];
+  return h.map((d,i)=>{
+    const prior=h.slice(0,i).map(x=>x.dp);
+    let z=null;
+    if(prior.length>=MIN_OBS){const s=sd(prior); if(s>0) z=(d.dp-mean(prior))/s;}
+    return {...d, since:chgPct(first.c,d.c), z, first:i===0};
+  });
+}
+
+function detailHTML(sym){
+  const {wl,latest,LABEL}=STATE, info=wl[sym]||{}, cls=info.cls||'index';
+  const days=daysOf(sym), first=days[0], last=days[days.length-1];
+  const stale=last.date!==latest.date;
+  const w5=days.length>5 ? chgPct(days[days.length-6].c,last.c) : null;
+  const hi=days.reduce((a,b)=>b.c>a.c?b:a), lo=days.reduce((a,b)=>b.c<a.c?b:a);
+  const flags=days.filter(d=>d.z!==null&&Math.abs(d.z)>=2);
+  const cum=v=>v===null?'<span class="desc">—</span>':`<span class="${cl(v)}">${pct(v)}</span>`;
+  return `
+  <a class="back" href="#">← All instruments</a>
+  <div class="dhead">
+    <span class="dsym">${sym}</span>
+    <span class="dname">${esc(info.name||sym)}</span>
+    <span class="chip"><i style="background:var(--c-${cls})"></i>${esc(LABEL[cls]||cls)}</span>
+  </div>
+  <p class="note" style="margin-top:8px">Closing price on every session since ${dlong(first.date)}, when this fund was first collected.
+    The dashed line is that first close, so anywhere above it means the fund is up since tracking began.
+    ${stale?`<strong>No reading for the latest session (${dshort(latest.date)})</strong> — the last close shown is ${dshort(last.date)}.`:''}</p>
+
+  <div class="dstats" style="--dcol:var(--c-${cls})">
+    <div class="tile"><div class="lab">Latest close</div><div class="val">${fmt(last.c)}</div>
+      <div class="chg ${first===last?'flat':cl(last.dp)}">${first===last?'first reading':pct(last.dp)+' on the day'}</div><div class="sub2">${dlong(last.date)}</div></div>
+    <div class="tile"><div class="lab">Since ${dshort(first.date)}</div><div class="val">${cum(days.length>1?last.since:null)}</div>
+      <div class="sub2">from ${fmt(first.c)} to ${fmt(last.c)}</div></div>
+    <div class="tile"><div class="lab">Last 5 sessions</div><div class="val">${cum(w5)}</div>
+      <div class="sub2">${w5===null?'needs 6 closes on file':`from ${dshort(days[days.length-6].date)}`}</div></div>
+    <div class="tile"><div class="lab">Range on file</div><div class="val" style="font-size:18px;margin-top:12px">${fmt(lo.c)} – ${fmt(hi.c)}</div>
+      <div class="sub2">low ${dshort(lo.date)} · high ${dshort(hi.date)}</div></div>
+  </div>
+
+  <section>
+    <h2>Price trend</h2>
+    <div class="chart dchart" id="dchart" role="img" aria-label="${sym} closing price by session"></div>
+  </section>
+
+  <section>
+    <h2>Every daily close</h2>
+    <p class="note">${days.length} session${days.length===1?'':'s'} on file, newest first. <em>Since ${dshort(first.date)}</em> compares each close with the first one.
+      A move is only scored as unusual once there are ${MIN_OBS} earlier days to compare it with${flags.length?` — ${flags.length} ${flags.length===1?'day was':'days were'} flagged`:''}.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Date</th><th style="text-align:right">Close</th><th style="text-align:right">Day</th>
+        <th style="text-align:right">Since ${dshort(first.date)}</th><th style="text-align:right">Z-score</th><th>Unusual?</th></tr></thead>
+      <tbody>${days.slice().reverse().map(d=>{
+        let zc='<span class="desc">—</span>', st;
+        if(d.first) st='<span class="pill n">first day</span>';
+        else if(d.z===null) st='<span class="pill n">too early</span>';
+        else { const hot=Math.abs(d.z)>=2;
+          zc=`<span class="${hot?(d.z>0?'up':'down'):''}">${d.z>=0?'+':''}${d.z.toFixed(2)}</span>`;
+          st=hot?`<span class="pill ${d.z>0?'hi':'lo'}"><i class="dot"></i>unusual</span>`:'<span class="pill n">typical</span>'; }
+        return `<tr><td>${dlong(d.date)}</td><td class="num">${fmt(d.c)}</td>
+          <td class="num">${d.first?'<span class="desc">—</span>':`<span class="${cl(d.dp)}">${pct(d.dp)}</span>`}</td>
+          <td class="num">${d.first?'<span class="desc">start</span>':cum(d.since)}</td>
+          <td class="num">${zc}</td><td>${st}</td></tr>`;
+      }).join('')}</tbody>
+    </table></div>
+  </section>`;
+}
+
+function drawChart(sym){
+  const el=document.getElementById('dchart'); if(!el) return;
+  const days=daysOf(sym);
+  if(days.length<2){ el.innerHTML='<p class="note" style="margin:8px">Only one close on file so far — the chart starts once there are two.</p>'; return; }
+  const W=Math.max(280, el.clientWidth-24), H=W<520?220:280;
+  const L=58, R=14, T=12, B=26, pw=W-L-R, ph=H-T-B;
+  const cs=days.map(d=>d.c);
+  let lo=Math.min(...cs), hi=Math.max(...cs); const pad=(hi-lo)*0.12||hi*0.01; lo-=pad; hi+=pad;
+  const raw=(hi-lo)/4, mag=10**Math.floor(Math.log10(raw)), step=[1,2,2.5,5,10].map(k=>k*mag).find(s=>s>=raw);
+  const ticks=[]; for(let v=Math.ceil(lo/step)*step; v<=hi+1e-9; v+=step) ticks.push(v);
+  const x=i=>L+i*(pw/(days.length-1)), y=v=>T+(1-(v-lo)/(hi-lo))*ph;
+  const first=days[0], last=days[days.length-1];
+  const k=last.since>0.05?'up':last.since<-0.05?'down':'flat';
+  const dec=step<1?2:0;
+  const d=days.map((p,i)=>`${i?'L':'M'}${x(i).toFixed(1)} ${y(p.c).toFixed(1)}`).join(' ');
+  const nLab=W<520?3:5, idx=[...new Set(Array.from({length:nLab},(_,j)=>Math.round(j*(days.length-1)/(nLab-1))))];
+  const flags=days.map((p,i)=>({p,i})).filter(o=>o.p.z!==null&&Math.abs(o.p.z)>=2);
+  el.innerHTML=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+    ${ticks.map(v=>`<line class="grid" x1="${L}" x2="${W-R}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}"/>
+      <text x="${L-8}" y="${(y(v)+4).toFixed(1)}" text-anchor="end">${v.toFixed(dec)}</text>`).join('')}
+    <line class="startln" x1="${L}" x2="${W-R}" y1="${y(first.c).toFixed(1)}" y2="${y(first.c).toFixed(1)}"/>
+    ${idx.map(i=>`<text x="${x(i).toFixed(1)}" y="${H-6}" text-anchor="${i===0?'start':i===days.length-1?'end':'middle'}">${dshort(days[i].date)}</text>`).join('')}
+    <path class="ln ${k}" d="${d}"/>
+    ${flags.map(o=>`<circle class="flag ${o.p.z>0?'hi':'lo'}" cx="${x(o.i).toFixed(1)}" cy="${y(o.p.c).toFixed(1)}" r="5"/>`).join('')}
+    <line class="xh" id="xh" x1="0" x2="0" y1="${T}" y2="${T+ph}" visibility="hidden"/>
+    <circle class="dot ${k}" id="hd" r="4.5" cx="0" cy="0" visibility="hidden"/>
+    <rect id="hit" x="${L}" y="0" width="${pw}" height="${H}" fill="transparent"/>
+  </svg>
+  <div class="tip" id="tip" hidden></div>
+  <div class="dkey">
+    <span><i class="dash"></i>First close (${fmt(first.c)}, ${dshort(first.date)})</span>
+    ${flags.some(o=>o.p.z>0)?`<span><i class="fd" style="background:var(--pos)"></i>Unusually large rise</span>`:''}${flags.some(o=>o.p.z<0)?`<span><i class="fd" style="background:var(--crit)"></i>Unusually large fall</span>`:''}
+  </div>`;
+  const svg=el.querySelector('svg'), tip=el.querySelector('#tip'), xh=el.querySelector('#xh'), hd=el.querySelector('#hd');
+  const move=ev=>{
+    const r=svg.getBoundingClientRect(), px=ev.clientX-r.left;
+    const i=Math.max(0,Math.min(days.length-1,Math.round((px-L)/(pw/(days.length-1)))));
+    const p=days[i], cx=x(i), cy=y(p.c);
+    xh.setAttribute('x1',cx); xh.setAttribute('x2',cx); xh.setAttribute('visibility','visible');
+    hd.setAttribute('cx',cx); hd.setAttribute('cy',cy); hd.setAttribute('visibility','visible');
+    tip.innerHTML=`<b>${dlong(p.date)}</b><br><span class="k">Close</span> <span class="m">${fmt(p.c)}</span><br>`
+      + (p.first?'<span class="k">First day collected</span>':`<span class="k">Day</span> <span class="m ${cl(p.dp)}">${pct(p.dp)}</span><br><span class="k">Since ${dshort(first.date)}</span> <span class="m ${cl(p.since)}">${pct(p.since)}</span>`);
+    tip.hidden=false;
+    const tw=tip.offsetWidth;
+    tip.style.left=(cx+12+tw+20>W? cx+12-tw-14 : cx+12+14)+'px';
+    tip.style.top=Math.max(4, cy-10)+'px';
+  };
+  const leave=()=>{tip.hidden=true; xh.setAttribute('visibility','hidden'); hd.setAttribute('visibility','hidden');};
+  const hit=el.querySelector('#hit');
+  hit.addEventListener('pointermove',move); hit.addEventListener('pointerdown',move); hit.addEventListener('pointerleave',leave);
 }
 
 fetch('history.json',{cache:'no-store'})

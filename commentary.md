@@ -1,5 +1,45 @@
 <!-- Newest entry at the top. Each entry starts with a '## ' heading. -->
 
+## 17 September 2026 — my screen's first real flags
+
+On Monday 14 September my dashboard flagged its first unusual moves. EEM
+(an emerging markets fund) fell 2.73%, and XLV (a US healthcare fund) rose
+1.45%. They looked like two separate stories. I think they were one.
+
+EEM isn't really a bet on "emerging markets" in general. Over 40% of it is
+technology companies, and nearly half is Taiwan and South Korea, which are
+home to the world's biggest chipmakers. So the flag was a chip selloff.
+Healthcare rising on the same day was the other side of it: money leaving
+risky tech and going somewhere safer.
+
+The trigger was the chief executives of Anthropic and OpenAI calling for
+the industry to slow down AI development. If AI companies build more
+slowly, they buy fewer chips, so chipmakers expect to sell fewer at lower
+prices. Companies that *buy* chips benefit from the same news, because the
+money chipmakers lose is money buyers no longer have to spend. The news
+moved them in opposite directions.
+
+My first reaction was that the AI bubble was bursting. The next two days
+don't support that. EEM fell another 0.35% and then 0.06%, so it didn't
+crash further, but it didn't bounce either. Healthcare kept its gain. My
+reading is that investors aren't panicking, but they aren't convinced it's
+over.
+
+That reading has a complication. On Wednesday the Federal Reserve raised
+interest rates for the first time since 2023, to 3.75–4.00%, and higher
+rates also tend to push tech stocks down. So was it the AI news or the
+Fed? The currencies suggest the Fed wasn't the main reason. The dollar had
+its biggest rise of the week that day (UUP, the US dollar fund, +0.64%),
+so the rate rise clearly landed. But US tech (XLK) actually rose 0.10%,
+and EEM barely moved. If the Fed were holding chip stocks down, they
+should have fallen on the day it acted.
+
+What would settle it: if chip stocks keep drifting lower next week with no
+new AI news, the market believes the slowdown is real; if they recover,
+Monday was an overreaction. The bigger test is whether AI companies
+actually cut what they spend on chips. Until they do, this is a fear, not
+a fact.
+
 ## 9 September 2026 — marking my own homework
 
 On 1 September I argued the oil move was a risk premium on supply that

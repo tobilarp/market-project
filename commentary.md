@@ -1,5 +1,37 @@
 <!-- Newest entry at the top. Each entry starts with a '## ' heading. -->
 
+## 6 October 2026 — answering my own gold question
+
+On 9 September I wrote that I didn't know why gold was falling during a
+geopolitical shock, when it's meant to be the safe place money runs to.
+Four weeks later, my data has given me an answer.
+
+Since 9 September, gold (GLD) is down 5.9% and silver (SLV) is down 9.2%.
+On 28 September both were flagged by my screen on the same day: gold
+−3.94% and silver −5.49%. Over the same period, long-dated US government
+bonds (TLT) fell 5.7% and the dollar (UUP) rose 3.6%.
+
+Those three moves fit together. Falling bond prices mean rising interest
+rates, and the Federal Reserve raised rates on 16 September. Gold pays no
+interest, so when you can earn more just holding bonds or cash, holding
+gold costs you more. A stronger dollar adds to that, because gold is
+priced in dollars, so it gets more expensive for everyone else. On 9
+September I said this explanation pointed the right way but looked far too
+weak. Over four weeks, it has held up better than anything else I've
+tested.
+
+I should be careful, though. These moves happening together doesn't prove
+one caused the other, and with daily closing prices I can't see which
+moved first.
+
+The other thing I'm watching is the two oil prices. Since tracking began
+on 27 August, Brent crude (BNO), the global benchmark, is up 18.8%, but US
+crude (USO) is up only 10.8%. On 22 September they were only about a point
+apart. My guess is that disruption around the Strait of Hormuz hits oil
+shipped by sea, which is priced off Brent, harder than oil produced inside
+the US. My data can't confirm that yet. If the gap closes once shipping
+calms down, the guess was probably right.
+
 ## 17 September 2026 — my screen's first real flags
 
 On Monday 14 September my dashboard flagged its first unusual moves. EEM

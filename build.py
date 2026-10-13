@@ -7,6 +7,9 @@ Injects two things at build time:
     as a local file (where fetch() of a sibling file is blocked). On GitHub
     Pages the page fetches history.json live and this copy goes unused.
   * commentary.md, the hand-written analyst notes, split into dated entries.
+  * backfill.json, if present: daily closes from before collection began,
+    loaded once by backfill.py. Used only to widen each fund's z-score
+    baseline, so the page can tell a crisis move from a normal one.
 """
 
 import json
@@ -55,8 +58,13 @@ def inject(value):
     return json.dumps(value).replace("<", "\\u003c")
 
 
+backfill_path = here / "backfill.json"
+backfill = (json.loads(backfill_path.read_text(encoding="utf-8"))
+            if backfill_path.exists() else {})
+
 subs = {
     "/*__HISTORY__*/null": inject(history),
+    "/*__BACKFILL__*/{}": inject(backfill.get("series", {})),
     "/*__COMMENTARY__*/[]": inject(entries),
 }
 
@@ -70,6 +78,7 @@ for marker, value in subs.items():
 print(f"Built index.html ({len(out):,} bytes, "
       f"{len(history['snapshots'])} snapshot(s), "
       f"{len(entries)} commentary entr{'y' if len(entries) == 1 else 'ies'}, "
+      f"{len(backfill.get('series', {}))} fund(s) backfilled, "
       f"{len(raw.split())} words)")
 for e in entries:
     print(f"  - {e['heading'] or '(untitled)'}")

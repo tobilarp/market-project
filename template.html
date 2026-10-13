@@ -330,6 +330,16 @@
       is flagged. Scoring needs at least <code>10</code> prior observations; below that the
       screen reports insufficient data rather than a number it can't support.
     </p>
+    <h3>Why the baseline reaches back before collection</h3>
+    <p>
+      Collection began on 27 August 2026, with the Iran oil shock already under way, so at
+      first every fund's "normal" was a crisis normal — oil jumping about and drifting
+      upwards was all the screen had ever seen, so it could never call that unusual. To fix
+      that, the closes from the months before collection were loaded once from a second
+      source (Alpha Vantage) and added to each fund's baseline. They only feed the z-score;
+      every table, chart and "Since" figure still starts from the first day this dashboard
+      collected itself.
+    </p>
     <h3>Why ETF proxies</h3>
     <p>
       The free data tier covers equities but not futures or FX, so commodities and foreign
@@ -358,7 +368,24 @@
 <script>
 const INLINE = /*__HISTORY__*/null;
 const NOTES = /*__COMMENTARY__*/[];
+// Daily closes from BEFORE collection began (backfill.py, Alpha Vantage).
+// Collection started mid-crisis, so without these every fund's "normal" was
+// a crisis normal. They only widen the z-score baseline: the tables, charts
+// and "Since" figures still start from the first collected session.
+const BACKFILL = /*__BACKFILL__*/{};
 const MIN_OBS = 10;
+
+// Daily % changes implied by the backfilled closes, one list per fund.
+// Worked out from consecutive closes; the move from the last backfilled close
+// into the first collected session is already in the collected data (its dp),
+// so it is not counted twice.
+const PRE = {};
+for(const [sym,rows] of Object.entries(BACKFILL||{})){
+  const out=[];
+  for(let i=1;i<rows.length;i++) out.push((rows[i][1]/rows[i-1][1]-1)*100);
+  PRE[sym]=out;
+}
+const preOf = sym => PRE[sym]||[];
 
 const pct = n => (n>=0?'+':'') + n.toFixed(2) + '%';
 const pp  = n => Math.abs(n).toFixed(2) + (Math.abs(n)===1?' point':' points');
@@ -598,7 +625,7 @@ function render(hist){
   const rows=Object.entries(ser).map(([sym,h])=>{
     const last=h[h.length-1];
     const stale=last.date!==latest.date;
-    const prior=(stale?h:h.slice(0,-1)).map(d=>d.dp);
+    const prior=preOf(sym).concat((stale?h:h.slice(0,-1)).map(d=>d.dp));
     let z=null;
     if(!stale&&prior.length>=MIN_OBS){const s=sd(prior); if(s>0) z=(last.dp-mean(prior))/s;}
     const back=k=> (!stale && h.length>k) ? chg(h[h.length-1-k].c, last.c) : null;
@@ -742,7 +769,7 @@ let _rz; window.addEventListener('resize',()=>{clearTimeout(_rz); _rz=setTimeout
 function daysOf(sym){
   const h=STATE.ser[sym], first=h[0];
   return h.map((d,i)=>{
-    const prior=h.slice(0,i).map(x=>x.dp);
+    const prior=preOf(sym).concat(h.slice(0,i).map(x=>x.dp));
     let z=null;
     if(prior.length>=MIN_OBS){const s=sd(prior); if(s>0) z=(d.dp-mean(prior))/s;}
     return {...d, since:chgPct(first.c,d.c), z, first:i===0};

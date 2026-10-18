@@ -336,7 +336,7 @@
       first every fund's "normal" was a crisis normal — oil jumping about and drifting
       upwards was all the screen had ever seen, so it could never call that unusual. To fix
       that, the closes from the months before collection were loaded once from a second
-      source (Alpha Vantage) and added to each fund's baseline. They only feed the z-score;
+      source (Alpha Vantage) and added to each fund's baseline.<span id="bfcov"></span> They only feed the z-score;
       every table, chart and "Since" figure still starts from the first day this dashboard
       collected itself.
     </p>
@@ -622,6 +622,18 @@ function render(hist){
   const chg=chgPct;
   const firstDate=snaps.filter(s=>s.final!==false)[0]?.date || latest.date;
   const nf=document.getElementById('nfunds'); if(nf) nf.textContent=Object.keys(wl).length||Object.keys(q).length;
+  // The backfill loader is capped at 24 calls a day by the free tier and there
+  // are 26 funds, so a fund can still be waiting on its earlier closes. Say
+  // which ones rather than claiming every baseline was widened; this sentence
+  // disappears on its own once every fund has been loaded.
+  const bfc=document.getElementById('bfcov');
+  if(bfc){
+    const none=Object.keys(wl).filter(s=>!((BACKFILL||{})[s]||[]).length);
+    const one=none.length===1;
+    bfc.textContent = none.length
+      ? ` ${none.join(' and ')} ${one?'is the exception':'are the exceptions'}: ${one?'its':'their'} earlier closes have not been loaded yet, so ${one?'it is':'they are'} scored against collected sessions alone — a narrower baseline than the other ${Object.keys(wl).length-none.length}.`
+      : '';
+  }
   const rows=Object.entries(ser).map(([sym,h])=>{
     const last=h[h.length-1];
     const stale=last.date!==latest.date;

@@ -1,4 +1,4 @@
-<## 2 November 2026: three weeks at once
+## 2 November 2026: three weeks at once
 
 I haven't written a note since 6 October so this one covers everything up to Friday 30 October in one go. Looking at three weeks together actually helped, because the biggest thing going on only really shows when you add the days up.
 

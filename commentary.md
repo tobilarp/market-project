@@ -1,4 +1,16 @@
-<!-- Newest entry at the top. Each entry starts with a '## ' heading. -->
+<## 2 November 2026: three weeks at once
+
+I haven't written a note since 6 October so this one covers everything up to Friday 30 October in one go. Looking at three weeks together actually helped, because the biggest thing going on only really shows when you add the days up.
+
+Money has been moving out of tech. Since 6 October the US tech fund (XLK) is down 11.1% and the Nasdaq 100 fund (QQQ) is down 9.1%. Over the same time the US healthcare fund (XLV) is up 10.6% and my screen flagged it twice, on 14 October (up 2.53%) and 29 October (up 2.40%). It's the same thing I saw on 17 September with money leaving risky tech and going somewhere safer. This time it's just a lot bigger.
+
+Friday 30 October was my busiest day so far with five flags. XLK fell 4.89%, QQQ fell 3.47%, the S&P 500 fund (SPY) fell 1.77%, gold (GLD) fell 3.47% and silver (SLV) fell 5.67%. Five flags doesn't mean five things happened though. XLK, QQQ and SPY all hold the same big tech companies so one tech selloff got counted three times. Gold and silver normally move together so that's one metals move counted twice. So really it was two events. That's the thing I most want to fix, because my screen checks every fund on its own and can't tell when a few flags are actually the same story.
+
+Metals are the part that doesn't fit what I said last time. Since 6 October silver is down 19.6% and gold is down 6.9%. Back then I put gold falling down to interest rates going up and the dollar getting stronger. But since then long term US government bonds (TLT) are up 5.9%, which means rates have actually been coming down and the dollar fund (UUP) has barely moved at 0.3%. So my explanation worked for September but it doesn't work for October. Something else is dragging metals down and my data can't tell me what yet.
+
+Oil is still going the other way. Since I started tracking on 27 August, Brent crude (BNO) is up 38.1% and US crude (USO) is up 29.9%. Both are the highest they've been on my dashboard. Oil and gas companies (XLE) are up 12.4%. The gap between Brent and US crude is still about 8 points, which is pretty much where it was on 6 October. I said before that the gap should close once shipping calms down. It hasn't closed, which fits with my guess, but it doesn't prove it.
+
+Next I want to see if healthcare keeps winning if tech starts to recover, or if they just swap back.
 
 ## 6 October 2026 — answering my own gold question
 

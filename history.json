@@ -106,22 +106,232 @@
         "cls": "sector"
       }
     },
-    "last_updated": "2026-11-06T01:42:31.345696+00:00",
-    "snapshot_count": 50,
+    "last_updated": "2026-11-07T01:02:17.059782+00:00",
+    "snapshot_count": 51,
     "news": [
       {
-        "headline": "Midterms upended Congress but Trump still commands foreign policy - Reuters",
-        "summary": "Midterms upended Congress but Trump still commands foreign policy\u00a0\u00a0Reuters",
+        "headline": "Trump makes hardliner Stephen Miller his chief of staff after midterm defeat - Reuters",
+        "summary": "Trump makes hardliner Stephen Miller his chief of staff after midterm defeat\u00a0\u00a0Reuters",
         "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPaFdhWXVRZDFtNThlVzMtcUs4eU9nTlVZZHJHZzAxbUhKNVBYN3FoR0lSMHJNSzVkQVJQdXlaWTZQZXNwUzEwSkhxRjBwQ1dRZzIyMFV5QkhTaWRmWHVKWEdSQmhyR1NHaUhyMlpnV09GVkxPbmh5MTlUZEphbVE1OENqSXlNTmdEejZPbUlNdmdzRTBiRnVYTHNuWHVQUEo0VXFvODJTaElxQQ?oc=5",
-        "datetime": 1793920062
+        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPRW9VOFJHVC05elRKeHJYaUVfalhSNTJYS0dhNkJobGVIaGU1ZVlLaUNlakI2SURhTHNqc2c2ODFYcWpVaE5uUXpoNEI1d1h3MjFxbTlqNHQwVVJmNEFyUl9uRWktTWdRMGs1Z05GUXRxU2FwVC0wV19JSExCbi1DM1pPNHZVUzFZcVB3ak93TWM4MUk?oc=5",
+        "datetime": 1794005898
       },
       {
-        "headline": "New wave of bomb hoaxes hits dozens of flights across Europe - Reuters",
-        "summary": "New wave of bomb hoaxes hits dozens of flights across Europe\u00a0\u00a0Reuters",
+        "headline": "US Treasury sanctions Canadian money services firms over Iran-related transactions - Reuters",
+        "summary": "US Treasury sanctions Canadian money services firms over Iran-related transactions\u00a0\u00a0Reuters",
         "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNSUllcFZWajRSZE9PZE82Zl9aMHl5SlF6b09IejNjUjdqLTRJb2hKemVORDZGVDdkZkFaUksyV3hxMXNCNXlHZnR2QjY5anN0RkFpeC1UMzBQcjkxRC05S0tBcVhSOTA1dWw5d2s3ZDNkX1FadkI3SGh0Ti1zaWloUFVteWRfNlJNQl9uUkRVY0FyXzNDTEo2dkI5R3NveEd2eVVSeHFTOXhGQ0V3ZjRGOFpfcWJ6dm9VUXR3bGNxXzhrLXYtV29sRkR1NTc?oc=5",
-        "datetime": 1793919517
+        "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQanB1RlNfclNuTUN5SEpJTjFWWUM1UVR2V2xLclNnTjhfNnp0VjNGZE5qeDBiekZXOFpLR2hOTnFud1ZKYlgzaFF6dGpwbkdENXF5VldQSEl0MEE1X0dHbWMyWHFvOU82WC01SjNSamFuSFQtY1M4VHJMN1VEMzlyQnN3UkotaXhiTm4taGdud2w5Wnk0cmtVQlp1MjRvNEJreERfdzZZbmtRQWo5d3NTYnVpOThYRjUwU3BJSGRFSEE?oc=5",
+        "datetime": 1794005217
+      },
+      {
+        "headline": "'We have nothing': Displaced mothers in Yemen's Taiz collect plastic to survive - Reuters",
+        "summary": "'We have nothing': Displaced mothers in Yemen's Taiz collect plastic to survive\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNd21TODNmeHBiaFVfYXdtREVFcmtTaFIwaUI4MnpyRUN4ZHRZVHpIMmVBWkQxSkVzSTJ3Q3JPa0VlMkZZZzhxdTcwY1ZxWG55ZmN6aHh1aHpXTXB5alRETDJYaXdiWnNuMG9HWjhQWDFFS05Gc3VITFRkbzVKVjNXS1dlMEFsRTd6cmJfdTVQMjNOUklLdHlUaFZjMG5DVEk2MUV0ZDBWa1c0MHY5Q0tlTVdPcUphOFFscHE4TEpwTks?oc=5",
+        "datetime": 1794002754
+      },
+      {
+        "headline": "Sen. Chris Murphy released from hospital after stroke, will miss votes for 'several weeks' as he rehabs",
+        "summary": "The Connecticut Democrat Murphy has been discussed as a possible candidate for the White House in 2028.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/chris-murphy-stroke-hospital-senate.html",
+        "datetime": 1793998393
+      },
+      {
+        "headline": "Here's a rapid-fire update on all 31 of our stocks, including 2 to buy now",
+        "summary": "We closed out a wild market week on Friday at the Investing Club's fourth Annual Meeting at the New York Stock Exchange.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/investingclub/2026/11/06/heres-a-rapid-fire-update-on-our-31-stocks-including-2-to-buy-now.html",
+        "datetime": 1793997363
+      },
+      {
+        "headline": "Top House Oversight Democrat warns Trump family to 'lawyer up'",
+        "summary": "With Democrats set to take control of the House in January, Rep. Robert Garcia is promising sweeping probes into Trump, his family and his administration.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/robert-garcia-trump-congress-oversight-investigations.html",
+        "datetime": 1793994156
+      },
+      {
+        "headline": "Fake job interview scams like the one that hit Binance are getting more sophisticated. Here are the new signs to watch for",
+        "summary": "Binance lost more than $6 billion in a hack partly caused by fake job interviews. Here's what job seekers can learn from it, and tips to avoid job search scams.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/make-it/2026/11/06/binance-hack-fake-job-interview-scams.html",
+        "datetime": 1793992196
+      },
+      {
+        "headline": "AI crush is powering one stock to sky-high valuations",
+        "summary": "Despite sky-high valuations, Mike Khouw argues Costco shares could present a compelling buy.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/ai-crush-is-powering-one-stock-to-sky-high-valuations.html",
+        "datetime": 1793988944
+      },
+      {
+        "headline": "Syria aids Saudi Arabia with military advice and training amid Houthi attacks, sources say - Reuters",
+        "summary": "Syria aids Saudi Arabia with military advice and training amid Houthi attacks, sources say\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxObFFuV2xuOUtpNDJEVlB0Q0NMYV9BQkNZTzkzRkNVWHBrVGI2TC0xeUk0LTVzdWJrclByYzR3OS1PV2VJaExTT0hud2hzSENNUnlZb0J5cE5yclAtcmljYnlRcFFTOXRuOFVYbUlnbmh3cU5qQTNQSWJ3SEJ1UENMTWFUOXVBZ2xVckpNWjcwOG5meGVBWFBZRlRyZ1Q4ZkNweDlsREhMRWFwX0NrSDctbVoyZDhfdUdzOFAyVmFReUFDNkVBcmc?oc=5",
+        "datetime": 1793981984
+      },
+      {
+        "headline": "Data center double-down: Hassett says Blue Wave won't stop AI build-out",
+        "summary": "Data centers are a crucial part of President Donald Trump's push to win the global artificial intelligence race, which continues despite the midterm results.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/data-centers-ai-elections-hassett.html",
+        "datetime": 1793980548
+      },
+      {
+        "headline": "Anthropic IPO announcement odds drop on Kalshi following midterms and AI sell-off",
+        "summary": "Kalshi traders cut the odds of an Anthropic IPO announcement before December as AI stocks sold off after Democrats won control of Congress.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/anthropic-ipo-kalshi-post-midterms-ai-sell-off.html",
+        "datetime": 1793979761
+      },
+      {
+        "headline": "Watch live: Jim Cramer shares his next investing moves for this tough market",
+        "summary": "At the Investing Club's 4th annual meeting, Cramer also reveals his outlook for 2027 and answers questions from the live audience and members at home.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/investingclub/2026/11/06/watch-jim-cramer-live.html",
+        "datetime": 1793978894
+      },
+      {
+        "headline": "Iran war spurs crackdown on clerics in tiny Gulf state Bahrain - Reuters",
+        "summary": "Iran war spurs crackdown on clerics in tiny Gulf state Bahrain\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNb3pBXzVOVlNRSEJ6MG95Y3ZyQU1wc2VWMmU3RlQ1ZjlEdDd3alhQUzJ6Q18yNy1aVXYwcHV2YlVWLWFaWGxLMjdhenZqbjBFOVFVVnVWdTVibXI2dTBpSGc0aDg0akpQZXpDbWl0SmFEZHAxMEJfQWVpN1p1MGtjWUo2ZG9POUE5dXd4U3phMk1VTUFRVmRPeEtZQmNGUzZFYnNiZ2k3a1pmSHFtWnFz?oc=5",
+        "datetime": 1793974904
+      },
+      {
+        "headline": "Seafarer killed in suspected missile attack on tanker in Gulf - Reuters",
+        "summary": "Seafarer killed in suspected missile attack on tanker in Gulf\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOQlB2Sm9vTXA4Rlp1QWxROTNzaUJ5TG0teEFKRWs1cmY3VFZkZXd6RlVzQmxNTGcxcmwyMG9SOUZlRVdKS0o2V08xbzdaRW5sbGNBTDdpRUduU0xsQUV3czAybnlIU0FPQUs1ZFR1RE41U3BpZXhIeHFYeEI1b2RRamRWQnhpOUVESHM2TENjNS1XUQ?oc=5",
+        "datetime": 1793974632
+      },
+      {
+        "headline": "Family offices boost startup investments in October, backing women's health and caregivers",
+        "summary": "Laurene Powell Jobs' Emerson Collective was the most active family-office investor with three startup bets.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/family-offices-boost-startup-investments-in-october.html",
+        "datetime": 1793973735
+      },
+      {
+        "headline": "Wall Street's fear gauge may be flashing a buy sign",
+        "summary": "History shows that similar spikes in the VIX have been good entry points for stocks",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/wall-streets-fear-gauge-may-be-flashing-a-buy-sign.html",
+        "datetime": 1793973731
+      },
+      {
+        "headline": "Our top 10 things to watch in the stock market Friday",
+        "summary": "Nasdaq futures are rebounding, and the October jobs report came in strong.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/investingclub/2026/11/06/our-top-10-things-to-watch-in-the-stock-market-friday.html",
+        "datetime": 1793973705
+      },
+      {
+        "headline": "Market sell-off hits hard: Advisors say 'stay the course with an eye on buying'",
+        "summary": "As retail investors pulled money out of individual stocks, more than three-quarters of advisors in a CNBC flash poll said investors should check their allocation against their goals or stay invested.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/market-sell-off-hits-hard-advisors-say-stay-the-course-with-an-eye-on-buying-.html",
+        "datetime": 1793972123
+      },
+      {
+        "headline": "'The whole landscape changed': Gaming CEOs see new opportunities post-midterms",
+        "summary": "Midterm results opened new gambling opportunities in Texas and other states while raising scrutiny of prediction-market operators.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/midterm-gambling-prediction-markets.html",
+        "datetime": 1793971241
+      },
+      {
+        "headline": "Tesla to wind down Cybertruck production in Texas next year to ramp Cybercab, Musk says",
+        "summary": "The Cybertruck and its polarizing design gained a niche following, but it did not achieve mass-market sales and Tesla has issued several voluntary recalls.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/tesla-cybertruck-texas-musk.html",
+        "datetime": 1793970756
+      },
+      {
+        "headline": "Small retailers brace for 'huge hit' this holiday season as shipping costs spike",
+        "summary": "As shipping costs surge due to high fuel prices, smaller and medium-sized retailers struggle to keep up, and they face a difficult holiday season.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/small-business-holiday-shipping-costs.html",
+        "datetime": 1793966401
+      },
+      {
+        "headline": "Greek national pleads not guilty in UK court to assisting a foreign intelligence service - Reuters",
+        "summary": "Greek national pleads not guilty in UK court to assisting a foreign intelligence service\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQa2h6dFoweGNIOHg5R1hDV0lnMDN5aFA5Z0FnNmpzV294WEVwcWRvbHRsY2UwLVdjZUFTTnZqZ2hJc0hMZzJJLUU4MEUwek5YSzl2RWF1bDN0Y0hhaUlkSGFNRF9Xc2ZGMUVoSDFRNU9rLTZTcmN1NHhzcFhMV1g4bEN2cUJrUjg3dXBocXRvbktnVkQ1QnBhMWFIb1JaOUI2eFdLTXAtXzdfTXR3TEVOSWh3a2Z0ZjNnQXdPRW4xUzVBMGtfMkRKNHdNNTVhcllsWk85WjFn?oc=5",
+        "datetime": 1793966391
+      },
+      {
+        "headline": "Could CRISPR cure rare diseases before birth? Scientists are getting closer",
+        "summary": "Researchers are exploring fetal gene editing to treat rare genetic disorders before they cause lasting damage.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/could-crispr-cure-rare-diseases-before-birth.html",
+        "datetime": 1793965801
+      },
+      {
+        "headline": "Outside groups urge congressional Dems to target corporate interests over Trump",
+        "summary": "Groups and strategists advising Democrats are warning them to use their investigative tools on corporate interests, rather than on President Donald Trump.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/democrats-corporate-oversight-trump.html",
+        "datetime": 1793964601
+      },
+      {
+        "headline": "Montana votes to ban corporate political money. Next stop? Probably the Supreme Court",
+        "summary": "Montana voters approved a novel strategy to restrict corporate political spending, setting up a constitutional fight that could reach the Supreme Court.",
+        "source": "CNBC",
+        "url": "https://www.cnbc.com/2026/11/06/montana-initiative-194-corporate-spending.html",
+        "datetime": 1793962801
+      },
+      {
+        "headline": "Pakistan's leaders dread US Democrats' win but its households are praying for it - Reuters",
+        "summary": "Pakistan's leaders dread US Democrats' win but its households are praying for it\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOX2hMNnp4TGpLdzMzY204NW8zTHdaZG1xSUNLT1N6RGoxVFJEemVYOWNIUC1JSGl3T1h0NDZkMzExSWFoajIyQXdFSzNxYkI3YkR5QXc3RUtsRWd6ZmpSRGVVVmg2MnhGTW96OFppTFlXMmNSVHVEUXVRdTlkbmQzYzZqZmRnZWdnajZsdXM1M3d6UmpsX0tpalJNQ2s2dXhEMHU5U1FlMW9SZmtPQlFJVmdJMGNoUEFpSFpESVlVZHJVSUE?oc=5",
+        "datetime": 1793962544
+      },
+      {
+        "headline": "COMMENTARY: NATO\u2019s plans come up against messy US, French and German politics - Reuters",
+        "summary": "COMMENTARY: NATO\u2019s plans come up against messy US, French and German politics\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQd1BlaWVfcDIyNlJKWjVRci01Ukd4a1I4Yk9vcW12U1NUMlhQTDdYa09iTFpzcktKRGdVNGlGUGE5WlRZQm1vREJLZDhZUzh6bTNLRDJ3QVJXOTZ4NjByRm1zaGsycWg0TFotWjAyRXY2T3lWOTVoRS10M1g5QXVDcmVtZjVDdVRUOS1CbG5LRVdVTUFHR1dJOTg2eUxTcHVrb1F5SEs4WFRLdw?oc=5",
+        "datetime": 1793956009
+      },
+      {
+        "headline": "Markets fret over growth and inflation, just as tech rout gains speed - Reuters",
+        "summary": "Markets fret over growth and inflation, just as tech rout gains speed\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxONUh4V2hzQnA1Rk9zNTN6d3ZxcVZycGZQVmNUNjR3NmpXSmphZHh4LWZvaGJmTTVEWDdBc0lNWmZyUUp3MTFndk5uZl80Qnk0QXotRmo5S1g0MVhDejlwMjJlczNLVWY1eHRLZ1c4dExyOUNqdjJPaUFhVnE2WC16QUc4aTVfUlAwQUtKMktZYi1STk94cXBnSXF5OEQ?oc=5",
+        "datetime": 1793941740
+      },
+      {
+        "headline": "Crude gains on worries about renewed US attacks on Iran - Reuters",
+        "summary": "Crude gains on worries about renewed US attacks on Iran\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOR0loTjAtWUlkbnpIR2huZE8zWWkxZHZIZlprNlQ5Z3BSaGUxcnE1ZDdqbXFuOHFpQVdrbzEyNnRUSGR4ZDh3SEpqQkpqX2NZa0JlZjEyZlp3RElJMFlhVDRLLTZ3MzRuV2NuTXR3SjhQejExMVR4eE10YThVcmJYaTdNYmt1SjJfeG10NlJRRFB1SFNQUlRSanFrYzBFUjlZNjBGMjhxSi1MZG1sd19kWGU0Ykt5bmR4by1B?oc=5",
+        "datetime": 1793933340
+      },
+      {
+        "headline": "As high oil prices curb demand, fresh signs of glut appear - Reuters",
+        "summary": "As high oil prices curb demand, fresh signs of glut appear\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQem82aUU3S0NZWXNNcXlreW9xS3J0UnpIcDNCWVdqS3NyclRxSUtWenpmMEhoNmp6amtNSG5ZYmpuMzc1TElxODVYTmVSZURrYjJsbVliVXlVSzNtM3J5TDBMNl9sQ0JSTmxKQ2RxVzc4RnMxX2lIZGp3Y3kwTFdrUndLZkFMN0JkN2xLTi02dDZjT0x1Wk0ySTMxZlpNZWRmX1F6ZDhR?oc=5",
+        "datetime": 1793930640
+      },
+      {
+        "headline": "Hegseth vows to keep fighting from Pentagon, defends Iran war - Reuters",
+        "summary": "Hegseth vows to keep fighting from Pentagon, defends Iran war\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQR1JFX1RGSnZ0bDI2d1ZxN0JpSGpTN2NDT21RbEVMaXhyVGNfNDlHUkVsaU9pNGd1d1hzTjhFWmVxeGgzSmt5SDVEZHA2Q3RjUmVpaFdUSUVic3RBLTJNNms0U253VURJU3Uzdm5rSXRjMmtnSDRMbWhKaFA1R1dtRUZ0LUQxLTlieGhXUzA2QVVvU3BnRkhpLWJBekQzVm5YRVFzTzJxU2s?oc=5",
+        "datetime": 1793920800
+      },
+      {
+        "headline": "Devon Energy tops profit estimates on higher output, crude prices - Reuters",
+        "summary": "Devon Energy tops profit estimates on higher output, crude prices\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNMzMya3VoNTIwaGNKSmlHT2Y1X1Zvc21QZGJSYXRuZ2Y0VTZBcG9sX0ZRVWVtc1pGVHhWb2tEYldraUJmNGR6MklTYnBEdnZkX3JndlVldGJvMzh0VFZfMTZMcXJlYkdyU1lJUHY0djFHeXJBNmtwaGNNZjJoTVlWbGl2YmNWcjNvOHJlcWFEY19EX2VGRHViTkJ2SmRoTTY1S3FkWTd6bU9DMlZtWnRPWU12Z3VCUkxzOFE?oc=5",
+        "datetime": 1793920259
       },
       {
         "headline": "Nasdaq drops into correction territory \u2014 here\u2019s what typically happens next",
@@ -129,13 +339,6 @@
         "source": "CNBC",
         "url": "https://www.cnbc.com/2026/11/05/nasdaq-drops-into-correction-territory-heres-what-typically-happens-next.html",
         "datetime": 1793915853
-      },
-      {
-        "headline": "Iran sent nuclear proposal to the US via Qatar, senior Iranian official tells Reuters - Reuters",
-        "summary": "Iran sent nuclear proposal to the US via Qatar, senior Iranian official tells Reuters\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOSlJZVlphdWhPcDNGc1E5eDVNdDdMQkJNTXVDS0RYSVRqaC1tblFqQy1FekRQdldnV0FsMU5RdnVHNEI3UEZWMC1MY1l5cnRtcjBlcDlpUXdvX0hXbV91S1UxajV1TEx1VmJ2SzNLNElXSjc3YkdmYWw4VGNXZEl5NXR4RFNjRXBxeEZMLWpBT1Z5X2JRc3NEdkdMZDljQ0dkZXZRbzc3U1NmNkhnaFN5QzNhVmRzSmhsM0Q5VzU3Mm11OWZBa3M1V1lvaw?oc=5",
-        "datetime": 1793913790
       },
       {
         "headline": "Retail traders dump the most stocks in a single day since Covid sell-off",
@@ -152,11 +355,25 @@
         "datetime": 1793911573
       },
       {
+        "headline": "Ukraine expects fresh support after US mid-terms, minister says - Reuters",
+        "summary": "Ukraine expects fresh support after US mid-terms, minister says\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQc3BIUVNjZ1pLUVNfRnZ6NDB3T1VIRktQUjJjUVl5OFEyRkpRVnlHSTFZQmFSOWxRek1VaHlrelFpUUtPU1BETUtTWUdBczBmNi1EUzlmbjV4SW1IRGlqOEE0NThVN2FCMjBnbkhzUURwVHFjTEctdUw4NUpsekNWZ0huLXNQT0lfbWt4UENrR0dVb0RGSHNlT0FtazRtRWZzYVd4MkcxTQ?oc=5",
+        "datetime": 1793910223
+      },
+      {
         "headline": "How Wall Street's postelection rally got obliterated \u2014 and what's next",
         "summary": "Every weekday, the Investing Club releases the Homestretch; an actionable afternoon update just in time for the last hour of trading.",
         "source": "CNBC",
         "url": "https://www.cnbc.com/investingclub/2026/11/05/how-wall-streets-postelection-rally-got-obliterated-and-whats-next.html",
         "datetime": 1793909191
+      },
+      {
+        "headline": "Iran sent nuclear proposal to the US via Qatar, senior Iranian official tells Reuters - Reuters",
+        "summary": "Iran sent nuclear proposal to the US via Qatar, senior Iranian official tells Reuters\u00a0\u00a0Reuters",
+        "source": "Reuters",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOSlJZVlphdWhPcDNGc1E5eDVNdDdMQkJNTXVDS0RYSVRqaC1tblFqQy1FekRQdldnV0FsMU5RdnVHNEI3UEZWMC1MY1l5cnRtcjBlcDlpUXdvX0hXbV91S1UxajV1TEx1VmJ2SzNLNElXSjc3YkdmYWw4VGNXZEl5NXR4RFNjRXBxeEZMLWpBT1Z5X2JRc3NEdkdMZDljQ0dkZXZRbzc3U1NmNkhnaFN5QzNhVmRzSmhsM0Q5VzU3Mm11OWZBa3M1V1lvaw?oc=5",
+        "datetime": 1793908080
       },
       {
         "headline": "ConocoPhillips boosts dividend after beating estimates on higher oil prices - Reuters",
@@ -171,223 +388,6 @@
         "source": "Reuters",
         "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQMkR5dEUwb2FoSDZrZ2p1UVF1T3VzbjEwSmhUWFBSeElYM0lHamE3SE0zYVViRHNqZ2piYTBjbWtoZThDU01hQmpYRFlwMHJTTFl3S2MyWnFoZWh1VTRCdEFvckJZcHktYjNpMWxLbU1vOGp3N0k1Yi1FZ0xTMXYzU2I2OHVZeGZrVXdiUmJOZ0phb2dLTjVGTTQ4aGF0WEdOLTVzS2RLQzBYNXR5?oc=5",
         "datetime": 1793905140
-      },
-      {
-        "headline": "We're dipping into our large cash pile to buy this bank on Thursday's sell-off",
-        "summary": "In times of market volatility, we like to fall back on companies that offer consistent capital returns to shareholders.",
-        "source": "CNBC",
-        "url": "https://www.cnbc.com/investingclub/2026/11/05/were-dipping-into-our-cash-to-buy-this-bank-on-thursdays-sell-off.html",
-        "datetime": 1793903361
-      },
-      {
-        "headline": "Wall Street's fear gauge surges the most since April. Why traders think it should be even higher",
-        "summary": "From its intraday low to high Thursday, VIX moved more than 11 points, the biggest one-day move since April 9.",
-        "source": "CNBC",
-        "url": "https://www.cnbc.com/2026/11/05/wall-streets-fear-gauge-surges-the-most-since-april-why-traders-think-it-should-be-even-higher.html",
-        "datetime": 1793900056
-      },
-      {
-        "headline": "Across Tehran, billboards threaten Trump, Israel - Reuters",
-        "summary": "Across Tehran, billboards threaten Trump, Israel\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQRE5zQkdSYVNyRXplTGY4dXF1VmFOTk5peGlUZzFJOHFGY0dudUVjQTZ4XzJ2VmNpc2ZLOTZTd0h2amVDYTBpXzVqWlBIaWJqcE9zRENCTjRfeE9hc0t3M2RuNDNnbHFDYUpjY1NRTTY0cW9oTWc0YmtXU3ZrZjZPTFIzNjhaaDBwRERBbWVUd3RnRDNUamc?oc=5",
-        "datetime": 1793900040
-      },
-      {
-        "headline": "Bank of England raises rates for first time since 2023, warns more likely - Reuters",
-        "summary": "Bank of England raises rates for first time since 2023, warns more likely\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNcEhfdUpzSlRCb2JiYmFYMjdxaEZySFE1cEJFcVlEWG1qajB4V2VGTXNmcGhRNHdBSF9Wa3FKcFpwMUpVVEc5NnQtaEhnQy0xUHpBc1lpZWp3TlZoUEhMQ1NHcFplMndKcmJJNEJrYlg2VnhoZlVJSkxnUDZzRzh2N0FuSlRHcl9JQTZ0LUhVMmxOaS1NWV9uWE15X19TN3pDMHFUeWNIdkRVQlYtemNsTQ?oc=5",
-        "datetime": 1793898701
-      },
-      {
-        "headline": "Las Vegas Raiders owner Mark Davis says he's 'not a fan' of sports gambling amid prediction market boom",
-        "summary": "In an interview with CNBC Sport, Las Vegas Raiders owner Mark Davis expressed concerns about the expansion of sports gambling, particularly proposition bets.",
-        "source": "CNBC",
-        "url": "https://www.cnbc.com/2026/11/05/las-vegas-raiders-owner-mark-davis-on-sports-gambling-not-a-fan.html",
-        "datetime": 1793897335
-      },
-      {
-        "headline": "Tankers hit in Hormuz as Iran keeps up pressure after US vote - Reuters",
-        "summary": "Tankers hit in Hormuz as Iran keeps up pressure after US vote\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQS25WaGR6RHltaldweFlqblRLWTQwanRGbVY4Vm5YZXBVdUVacG5DSTU3SXd1N00zTDROTTlYaGlnQzZPQUlmeUNPRlExc01kSUUwTFkwQUpWTWlXZEtkdTZmQktpWXUwcGt6dVBHbjkyb25ISjB1N0tOaWNJRHBoNk9iSzBJMURrM2dlemVvVnU5aHplVko3aGlQc296enRpdDlLNWJDWGtLWDZZVWc?oc=5",
-        "datetime": 1793897249
-      },
-      {
-        "headline": "Investors eye risk of debt-ceiling standoff after Democratic sweep - Reuters",
-        "summary": "Investors eye risk of debt-ceiling standoff after Democratic sweep\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNSFJkY2Voejd3d3ZVOXgxOEMtS3U3eXZFUUdDancxUDdiVEEtOW1HMXE2dFhfcTRzR292NTJBNUltNTNhRmVzdTdHLXUtMXoteGdFLTJZNVhlLUs0Zm5CT0lWMVFxM1o0aWxKVUloYnpVNUZZS2VyZmRfZlJRZEs1SWdPUEZ6aGFnbS1XWHRmeXFjS1hMSlFBOTVXWFdFekIwT2tfaU50eTBoVzY0OFk3M3dQQkRrU3B1OHpV?oc=5",
-        "datetime": 1793896713
-      },
-      {
-        "headline": "We're booking big profits in 2 outperformers in Thursday's terrible market",
-        "summary": "They have nothing to do with tech and data centers, which are getting slaughtered.",
-        "source": "CNBC",
-        "url": "https://www.cnbc.com/investingclub/2026/11/05/were-booking-big-profits-in-2-outperformers-in-thursdays-terrible-market.html",
-        "datetime": 1793895746
-      },
-      {
-        "headline": "Expedia CEO says AI agents aren't changing booking habits \u2014 yet",
-        "summary": "Expedia CEO Ariane Gorin told CNBC that AI agents present an exciting time for the travel industry but that they haven't yet impacted bookings.",
-        "source": "CNBC",
-        "url": "https://www.cnbc.com/2026/11/05/expedia-ai-agents-booking-habits.html",
-        "datetime": 1793892895
-      },
-      {
-        "headline": "Three tax proposals targeting the rich that the new Congress could revive",
-        "summary": "Democrats' sweeping victories could revive tax proposals targeting carried interest, large trusts, and borrowing against stock.",
-        "source": "CNBC",
-        "url": "https://www.cnbc.com/2026/11/05/three-tax-proposals-targeting-the-rich-the-new-congress-could-revive.html",
-        "datetime": 1793891770
-      },
-      {
-        "headline": "PODCAST: Oil heads for pandemic-era fall - Reuters",
-        "summary": "PODCAST: Oil heads for pandemic-era fall\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPTUN4a1BScS1wZnluYTlzUWEwR0EtSUhnWU9VMGtEMkc3Y21FenVPbDU3X0dkak83aDh3VmFYdzltcVVuN3F3ZFJrLWwxeWxmZDZ1ZlNNeG9uY1FfQXdoc0xMYUh1T3hHeV9Ib3BtNGpRLXBPQVYxd3h1aEoxVklTVjlsOW01bXdTX3JJUzJrbGxwdzRKckk0?oc=5",
-        "datetime": 1793888967
-      },
-      {
-        "headline": "Jim Cramer's top 10 things to watch in the stock market Thursday",
-        "summary": "Dow futures are up this morning, and Nasdaq futures are down.",
-        "source": "CNBC",
-        "url": "https://www.cnbc.com/investingclub/2026/11/05/jim-cramers-top-10-things-to-watch-in-the-stock-market-thursday.html",
-        "datetime": 1793888803
-      },
-      {
-        "headline": "Jordanian officer killed in Amman stabbing, suspect arrested, security agency says - Reuters",
-        "summary": "Jordanian officer killed in Amman stabbing, suspect arrested, security agency says\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQVl90eTZDMU1FUm9NaF91OThBSDhrc09wdVZUVXliYzZiUGJIOW84Sk15ZTM3QWx4cVpzZTQ3Mkprd1kwWjNEOVRQdnBJRGF6TkE5ZlN6Q3dDYTNfY1U4VFpMcnliMXB3TFdDYkk4UWJkWmRYSm5EMGlvUVAxdVdVeDVPVFdCUUtCYlY2NTFnZS1UQUsxZ05NSzRZa3RWLXhHWnIzd2JmU1BwOTg3THE0Y3dpOEprZGx0S1diX1I1ZjBITzRZVEE?oc=5",
-        "datetime": 1793884063
-      },
-      {
-        "headline": "Instant view: Bank of England delivers first rate hike in three years, gilt yields rise - Reuters",
-        "summary": "Instant view: Bank of England delivers first rate hike in three years, gilt yields rise\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNX1NmeDl4ZndpQkllbEZoTmVYQzFUSXpCeFNTRnByV05HcVlaYXl0RkY4b0htT1dYTkhQZG9DNldqcmtna1gyNVhkdTZwWmR3NTBZb0gtUm9kWnlfQzVhMWJCTzVYSGhpLXkxS085ZGpwVUVEbWlTWmItbElUTzFqTEwydEJTSUVheFJsTGNjdnlfRW1RaURzWm5KOGs5Rmx1bUV4SUxpTWNaMlNhWGxPU2lnNkt0cXc?oc=5",
-        "datetime": 1793883509
-      },
-      {
-        "headline": "Soaring diesel prices helped usher in Democratic sweep - Reuters",
-        "summary": "Soaring diesel prices helped usher in Democratic sweep\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPU1IwcDFSeVlqQmNtemxBRTRIZURTTG1sb1ozNkdmS0VleXpmU0NJWFRWWHMzMVVfTHdyanV5Sm9qQWt5azhsdXVwaDlRMWljbW4xQWY0N3M3UDJYaU1wX1RveWpfOFBHX2F4b1ZYVDVtSXRXbEc5R214ak1ZeXR2eWdqOUlQY1d5ZVlMYkJyN1NkaE9IbmxuTDV2TV9JWGROTlM3NXNR?oc=5",
-        "datetime": 1793882295
-      },
-      {
-        "headline": "Democratic wave sweeps aside Trump-backed effort to redraw US House districts - Reuters",
-        "summary": "Democratic wave sweeps aside Trump-backed effort to redraw US House districts\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNcGl1SHNUa3JaWGtRLVF6Z21vRzE0emFIdnVMbmFualV3ME1KbTZXYkt6MkZCaDJKbmZ1MHFzZFh6SVdLOWFxXzF5OG5YcGZzLVI5SjhqUktLRW14N0Rud0FZMENNbHZ6TFp1d20xT1dINGswaU5Wc0JNd055dEtmQWtNb0tSZTdzWl94ODdHVlluMU9ETFVaMmgyVHMyMldtYkhFWkVXRjVPeXBDT0x3VmVGcENNUUlsZGk4?oc=5",
-        "datetime": 1793880813
-      },
-      {
-        "headline": "Here's what the Democratic election rout could mean for the U.S. economy",
-        "summary": "The biggest forces shaping the economy aren't going to change just because the party in power did.",
-        "source": "CNBC",
-        "url": "https://www.cnbc.com/2026/11/05/emocratic-midterm-economy.html",
-        "datetime": 1793880665
-      },
-      {
-        "headline": "Saudi Arabia warns of potential danger in Yanbu oil hub as Houthi attacks continue - Reuters",
-        "summary": "Saudi Arabia warns of potential danger in Yanbu oil hub as Houthi attacks continue\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQR1J2UXI1T2psd21CTE9jNjdvWmZpaktQTVh0Vzg1VGNzZndWZVNab0JhcFNkMEZSRlF1R0d1Vm9EVmZVMDhfUThrOG84Q2VQaTZocklZaEV4end3cjBUYWFTTWxWZFc4WjBLV1MtOFQ3c0d1bHRvODdrQTFTT01MLVFvTlA1eXI3T3JnMzlXNmpXcGNsWE1KQ3hQRDZCRG8xZjBZMTJSRHZqMmNuVkFWZTVXLXRqdkoxaUlvQUVmcVoxTW9FdFE?oc=5",
-        "datetime": 1793878432
-      },
-      {
-        "headline": "Erdogan says Turkey-Azerbaijan ties can overcome all obstacles amid growing tensions - Reuters",
-        "summary": "Erdogan says Turkey-Azerbaijan ties can overcome all obstacles amid growing tensions\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNUWQ5Y1RzUXE4Y3dsX1dSeVhXeEdiZlJaZ3FCekVyRTNLV1lsaEN2cE10bW12UDBnUlZqS2p3dlA5NnhQWTQyOGk1dUNWM2hYWTBLb0FsU0FsYVRMcGw3N0Mxd2MyOXduamJQOFZnbWxBMTZVS196MGhrTnVWMF9LSkxqdDdZT1FBc0M4MUltNll1cldIVVBUc1BGelJORXJXUllBeFo4c1B0Z3hRd0FFX0o0WVFySEZZVHlRbndNbXNxdlF4NlVfQw?oc=5",
-        "datetime": 1793873866
-      },
-      {
-        "headline": "Asia fuel oil benchmarks slump as market prices in potential Iran war de-escalation - Reuters",
-        "summary": "Asia fuel oil benchmarks slump as market prices in potential Iran war de-escalation\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQOURmMHZvcURoTHdPckpVdEYtMVA3WTktOGNLOGpHeTRZcGZ4OWZjQ2tHQTlTYy15N05pZ0VPemlkZEozUGdHTU9ieDdvZlEyU2dBbzZtbzVPNDVaaGVGNktHTGg0Nk5GbU9kYnVTN291Zkp4NV9Idk05OTNKR1FFckUtVnFfX25tWkRYd1A3VEdrME1YQjFzVzF2VDk1T1Fnc2RRdEZMZzZPNWN1YVVtX2MyTzV0SlA4eWMzOFVlQ0NBY3p2VXpsZQ?oc=5",
-        "datetime": 1793873582
-      },
-      {
-        "headline": "Tanker struck by two projectiles north of Qatar, crew status unconfirmed, UKMTO says - Reuters",
-        "summary": "Tanker struck by two projectiles north of Qatar, crew status unconfirmed, UKMTO says\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQZ2VIeHlJVm1QSVhTLTZ1dHFKMk9lelp2ZTU3MEJFaTN5bzlXdHFUMkdkUDhXeTJSWkNCaFdZTk1jbElDNEMyOXUyOTZaM2hFRDZsWHg5NVFnVWJSQzFhb3NRWjVJN2YtZk1fX1ZOWFAxWkR4ZDZyNndKZG81ZWYydU56ZWRNNV9lajVacVJFdTExdldlbGVEb0FGNjUyM1I0V1FRZ1B1cFM1ZUFzRFVPTWtpa0ktcV82WWhqV01Rb0xLVU1MRUlLQ3hRMzc1UQ?oc=5",
-        "datetime": 1793869234
-      },
-      {
-        "headline": "COMMENTARY: Asia hopes Democrats can provide relief from Trump's Iran war, tariffs - Reuters",
-        "summary": "COMMENTARY: Asia hopes Democrats can provide relief from Trump's Iran war, tariffs\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOUk1naVB2YlNzNHNsUVA1ZVp4ZU5QaUNocUZjdkt0VVdHZVVmZXdRZzhSdUt5RFROWXlBclNEM0p0NnJTc3dqaWlBWVhoUWRVczliT2JGR3l3RXU0R1N0aGZicXFZSkdiNjd6dmZJWVVoRWp4X21wNUJNd2EzOG5CMnJoR1ExaW1lX1Q4R0o0cHhBM1lZX0lnd0NLMkFVaTJZZ0FvUVNfejFaaFViQU9tX3REV2ZBNjdCOHU3ak1EcUdJX2xsbFdCWE9pVzk?oc=5",
-        "datetime": 1793862000
-      },
-      {
-        "headline": "Emirates profit plunges as Iran war rattles Middle East aviation - Reuters",
-        "summary": "Emirates profit plunges as Iran war rattles Middle East aviation\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQZ0FfNmtkUFFEaTlUdDhvdXZNYko4TUMwOVNTWVpEdHl5ZjMxUE8xdW9PRHNjelJlbFFkaFNEMEN6OHRnZVEzYnFXY09LQUtTa0FMSFZKY0I4amR2dUt3VGRTc3ExUGJ1cGFtQ245eDFuUkhkWUI3ZGNBMVQzN3NBRlZJOXJxZjRCRVN1STlia2lXUHdoRF9EdkhFcWpGZXJqUW9CUkJmUERhTzMxUGx0Wi1XX2ZwV3BEMVBHM1pmLWpYX01XX2xR?oc=5",
-        "datetime": 1793858580
-      },
-      {
-        "headline": "Morning Bid: Goldilocks or gridlock? - Reuters",
-        "summary": "Morning Bid: Goldilocks or gridlock?\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1xOVpFU1lMaklaLUIxcW9lWTl6bjhFZWI2UWtfdU1tblltMFNwZEJpd2RTaXhVdW1ES0gzWDFGRXJ6MzFrdXBZY1B2czRpczBWVHpOSzlGekNkUzdwLVBXR2ljNUNxWWpaYjhYdEdDMXk1M2pScFJ4dXA1OVV4OGM?oc=5",
-        "datetime": 1793857800
-      },
-      {
-        "headline": "Iran's IRGC says two tankers and tugboat caught fire in Strait of Hormuz - Reuters",
-        "summary": "Iran's IRGC says two tankers and tugboat caught fire in Strait of Hormuz\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQN2pHcmkxeDJDM184TXNiS2xIOUdXdHNrTXcyVHFKcUNGZEgtanhxTm9TR0UxWjA5cGlXSy12RVBLT3JYYVVBVEltbXFTNWtFT09OMVBIUkFEVlZiaW1mcVhPM3JfQ2tnZm1uRnJSQlVoX1FfNTl5bmh1c1pZMUJBVlVZeVdoWnlQMURoR0g0WVZYcjU4WDloZzRxMHh3Q24zMlRSYXV3MUFZTGxEQXM3NXNuNExxUQ?oc=5",
-        "datetime": 1793852460
-      },
-      {
-        "headline": "Indian shares log biggest gains in seven months on oil slide, foreign flows - Reuters",
-        "summary": "Indian shares log biggest gains in seven months on oil slide, foreign flows\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNVmJaMVVmaUE0cUtPUW9iRklDNUNCV2k4c1NXYzllRGYzeUdXOFJkeGVEOUNsdkhwc0pfc3pkSVdvb3Nwc3FMSE0xTVBnbEtiQ29Gd2NzbmFtMU9rVXNoNXF3MkRrMEtHczdSX0VGUExrTDkyNHAxYWI0SGFWbVRSZWhDaGlvNkhLdUtiZGdDaWVQaFJ0NkRkckJvQ0ZzSnM2dmFUd2tZXzdQaWZBaFN4Y3BNYXo0UkVZRGpQTkdTUQ?oc=5",
-        "datetime": 1793846220
-      },
-      {
-        "headline": "Chip selloff drags global stocks lower on AI spending concerns - Reuters",
-        "summary": "Chip selloff drags global stocks lower on AI spending concerns\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPUG9ENFo3M0RHNWI0VEdfTlZhWmpjVGR0UjViV3dBQllRVkNha0YzU1FhX2lDaWVUT1U1Ym5DbWRlOFpJZ3JPU3AwZ1Nia3NNWjdKc3Jvd0VXU3otQU83ZjFlQmZwbHcyZmJKZFk4dVJWaXhWQnV6MTF6TUpmaDcxNmdhbFFNaU1N?oc=5",
-        "datetime": 1793846100
-      },
-      {
-        "headline": "Brent crude jumps, settles up over $3 after tanker attacks - Reuters",
-        "summary": "Brent crude jumps, settles up over $3 after tanker attacks\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQdzM2c3YzcktwU285aS1QaVVzTk51WFR0UnpxMXlnaFdEd2RtZWYzMm81TDZQUTJZS0ZlLXFVV3ZhcGFibkdLZm9Remo3YjlhNHJTd1lxSXNMUFNzejhIMkt0TlFRXy1RZl9TdTkxbDhfdjQxUEIzcUhaYlpOMjZJSVViNmVPV0dRV0RmaTJ3dDJ3QUs4TTFleFlnZnNyUHhVYlQ5NldaZVRZRFd5dU5nVnRKVUQ0UFE?oc=5",
-        "datetime": 1793845200
-      },
-      {
-        "headline": "Rupee finds its footing as oil worries cool, traders watch flow momentum - Reuters",
-        "summary": "Rupee finds its footing as oil worries cool, traders watch flow momentum\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQME9GZlNzY1R1djlUYWZnQ2lQRXE3ZHoxQ1VhOEZhaVRyVTY3TWZIRXhNMDNaemNtb0NFNzJZeTZtYlRCX0FtbFlYenA4Z0gtSkZBZVFRQThHZkRtcHhsR09wWXVhdl9CLUQ2Z19JNWpFWlI0N013RFR4VDFrSTFoZzVQS3F5Y216eWdlMTlZbWxldWY4TXh0M09TLTBuX3lUZ1ZWRzVaRHhxSENxT3E4Qlpwd0E?oc=5",
-        "datetime": 1793845140
-      },
-      {
-        "headline": "South Korea to expand anti-piracy unit operations closer to Strait of Hormuz - Reuters",
-        "summary": "South Korea to expand anti-piracy unit operations closer to Strait of Hormuz\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNWmlVV005TWpIcUdLT2ZZaUpORmNMc09CYnNzQnFBRUhJeF8yTklGM20tcHlpZkI3bGpCa2VXQlJfOGd2MEdOTWtpN1BpMnNmUVUyYzF1R2U5SjN4bl90X2xGRDZ2MzY2aGU1WTVYM3otVlRhTjRXR2JMUWp5cGZsZFV1MFUtWG83QW1tMG44aXY3dmg4Zl9GbGFjMEZ5bWhUbGliempaM2dRaE9pZHlHUldkUndDZEtLTkdTUlQ1RQ?oc=5",
-        "datetime": 1793843640
-      },
-      {
-        "headline": "Bank of England poised to hike rates for first time in 3 years - Reuters",
-        "summary": "Bank of England poised to hike rates for first time in 3 years\u00a0\u00a0Reuters",
-        "source": "Reuters",
-        "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQYXM1eE1qNm05dkg5WWJabktscTRfLXlCdktDcTJYRjYzR2RLUXc1UkdTZHFwSzNCV2NxQTdPT2JrRTVENFNOeTdiYWtFZzZ0dFowUXV1anpnSWZudktCR3FwZm9QMFhJUTJtckJfdlpQM21seG1BVEV0MWpfNXJOZjhhcEwzUG5XZ2FNRk9RS0JrSFU4bElfdTFB?oc=5",
-        "datetime": 1793836980
       }
     ]
   },
@@ -11023,6 +11023,222 @@
           "h": 168.835,
           "l": 162.04,
           "t": 1793912400
+        }
+      }
+    },
+    {
+      "date": "2026-11-06",
+      "final": true,
+      "collected_at": "2026-11-07T01:02:17.059679+00:00",
+      "missing": [],
+      "quotes": {
+        "SPY": {
+          "c": 735.29,
+          "pc": 733,
+          "dp": 0.3124,
+          "h": 742.2104,
+          "l": 734.58,
+          "t": 1793998800
+        },
+        "QQQ": {
+          "c": 656.1,
+          "pc": 647.05,
+          "dp": 1.3987,
+          "h": 664.52,
+          "l": 653.99,
+          "t": 1793998800
+        },
+        "IWM": {
+          "c": 273.67,
+          "pc": 270.98,
+          "dp": 0.9927,
+          "h": 274.55,
+          "l": 270.23,
+          "t": 1793998800
+        },
+        "DIA": {
+          "c": 512.22,
+          "pc": 514.27,
+          "dp": -0.3986,
+          "h": 515.9756,
+          "l": 508.66,
+          "t": 1793998800
+        },
+        "EWU": {
+          "c": 47.22,
+          "pc": 47.89,
+          "dp": -1.399,
+          "h": 47.54,
+          "l": 46.76,
+          "t": 1793998800
+        },
+        "EWG": {
+          "c": 41.58,
+          "pc": 42.75,
+          "dp": -2.7368,
+          "h": 41.875,
+          "l": 41.42,
+          "t": 1793998800
+        },
+        "EFA": {
+          "c": 101.89,
+          "pc": 102.7,
+          "dp": -0.7887,
+          "h": 102.485,
+          "l": 101.27,
+          "t": 1793998800
+        },
+        "EEM": {
+          "c": 59.33,
+          "pc": 58.05,
+          "dp": 2.205,
+          "h": 59.77,
+          "l": 59.05,
+          "t": 1793998800
+        },
+        "USO": {
+          "c": 148.41,
+          "pc": 148.21,
+          "dp": 0.1349,
+          "h": 149.41,
+          "l": 146.7025,
+          "t": 1793998800
+        },
+        "BNO": {
+          "c": 62.22,
+          "pc": 62.53,
+          "dp": -0.4958,
+          "h": 62.64,
+          "l": 61.47,
+          "t": 1793998800
+        },
+        "GLD": {
+          "c": 372.52,
+          "pc": 375.49,
+          "dp": -0.791,
+          "h": 373.76,
+          "l": 369.26,
+          "t": 1793998800
+        },
+        "SLV": {
+          "c": 46.87,
+          "pc": 46.93,
+          "dp": -0.1278,
+          "h": 47.13,
+          "l": 46.34,
+          "t": 1793998800
+        },
+        "UNG": {
+          "c": 9.35,
+          "pc": 9.27,
+          "dp": 0.863,
+          "h": 9.53,
+          "l": 9.19,
+          "t": 1793998800
+        },
+        "DBA": {
+          "c": 26.11,
+          "pc": 26.16,
+          "dp": -0.1911,
+          "h": 26.15,
+          "l": 25.94,
+          "t": 1793998800
+        },
+        "UUP": {
+          "c": 29.13,
+          "pc": 28.92,
+          "dp": 0.7261,
+          "h": 29.16,
+          "l": 29.08,
+          "t": 1793998800
+        },
+        "FXE": {
+          "c": 102.77,
+          "pc": 103.5,
+          "dp": -0.7053,
+          "h": 102.96,
+          "l": 102.71,
+          "t": 1793998800
+        },
+        "FXB": {
+          "c": 128.28,
+          "pc": 129.23,
+          "dp": -0.7351,
+          "h": 128.4602,
+          "l": 128.26,
+          "t": 1793998800
+        },
+        "FXY": {
+          "c": 57.79,
+          "pc": 58.05,
+          "dp": -0.4479,
+          "h": 57.96,
+          "l": 57.79,
+          "t": 1793998800
+        },
+        "IEF": {
+          "c": 91.86,
+          "pc": 91.97,
+          "dp": -0.1196,
+          "h": 92.165,
+          "l": 91.681,
+          "t": 1793998800
+        },
+        "TLT": {
+          "c": 81.92,
+          "pc": 81.93,
+          "dp": -0.0122,
+          "h": 82.415,
+          "l": 81.71,
+          "t": 1793998800
+        },
+        "XLE": {
+          "c": 61.62,
+          "pc": 61.63,
+          "dp": -0.0162,
+          "h": 62.4,
+          "l": 61.205,
+          "t": 1793998800
+        },
+        "XLK": {
+          "c": 164.74,
+          "pc": 162.38,
+          "dp": 1.4534,
+          "h": 168.11,
+          "l": 163.68,
+          "t": 1793998800
+        },
+        "XLF": {
+          "c": 57.16,
+          "pc": 57.5,
+          "dp": -0.5913,
+          "h": 57.71,
+          "l": 56.7,
+          "t": 1793998800
+        },
+        "XLU": {
+          "c": 43.13,
+          "pc": 43.3,
+          "dp": -0.3926,
+          "h": 43.37,
+          "l": 42.6309,
+          "t": 1793998800
+        },
+        "XLV": {
+          "c": 184.8,
+          "pc": 184.91,
+          "dp": -0.0595,
+          "h": 185.9,
+          "l": 181.14,
+          "t": 1793998800
+        },
+        "XLI": {
+          "c": 162.67,
+          "pc": 162.47,
+          "dp": 0.1231,
+          "h": 163.84,
+          "l": 161.74,
+          "t": 1793998800
         }
       }
     }

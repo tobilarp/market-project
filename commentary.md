@@ -1,3 +1,15 @@
+## 10 November 2026: one election and two very different days
+
+The US midterms were on Tuesday 3 November and my screen had two of its busiest days ever straight after. The Democrats won Congress but Trump is still president, so the US now has a divided government. Markets seemed to price the good side of that on Wednesday and the bad side on Thursday.
+
+Wednesday 4 November had 12 flags, my record at the time. Oil collapsed with Brent crude (BNO) down 8.64% and US crude (USO) down 8.07%, because the result made a deal to end the Iran war look more likely. Cheaper oil means cheaper transport and energy for most companies so they keep more profit. It should also mean lower inflation, which gives the Fed less reason to raise rates again. That's why the Dow fund (DIA), financials (XLF) and UK (EWU) and German (EWG) shares all jumped over 3%. Oil and gas companies (XLE) fell 4.74% because they make less when oil is cheap. The thing I didn't notice at first is that tech (XLK) was flat at -0.01% on a day when nearly everything else rallied.
+
+Thursday 5 November showed why. XLK fell 8.00% and the S&P 500 fund (SPY) fell 4.41%, the biggest daily falls on my dashboard so far. SPY's z score of -5.70 is the most unusual move I've recorded. The worry was that a Democrat Congress could slow down building AI data centres through things like land, energy and permits. If fewer data centres get built, chipmakers sell fewer chips and their expected profits drop. This was 12 flags again but really it was one event. Tech is such a big part of the US market that one selloff dragged down QQQ, SPY, small companies (IWM) and Europe with it.
+
+There was also a big Nvidia story this fortnight. On 29 October the New York Times reported that US intelligence thinks a Chinese businesswoman close to Nvidia's boss Jensen Huang was passing information to China, and later reports said a US memo describes a romantic relationship. None of it has been proven in public. Nvidia says it was normal business and China denies it. I don't track Nvidia on its own, but my data says the story barely moved the market. Tech fell 4.89% on 30 October but that was mostly Intel's outlook and big tech earnings, and after the relationship reports came out on Friday 6 November XLK actually rose 3.73% on the Monday. A huge headline doesn't always mean a huge market move.
+
+My last note said oil was at its highest ever on my dashboard. That turned within hours, and the midterms pushed it much further. Next I want to see if Monday's bounce holds or if Thursday was the start of something bigger for tech.
+
 ## 2 November 2026: three weeks at once
 
 I haven't written a note since 6 October so this one covers everything up to Friday 30 October in one go. Looking at three weeks together actually helped, because the biggest thing going on only really shows when you add the days up.
